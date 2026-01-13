@@ -88,18 +88,19 @@ export default function ExerciseCard({
 
       {/* Edit Mode Actions */}
       {isEditing && (
-        <div className="space-y-3 border-t border-bg-tertiary pt-4">
+        <div className="space-y-3 border-t border-tertiary pt-4">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 bg-green-500/20 text-green-400 rounded-lg font-semibold text-sm hover:bg-green-500/30 transition-all"
+            className="w-full py-3 font-semibold text-sm hover:opacity-80 transition-all rounded-lg"
+            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
           >
             + Série
           </button>
-          
+
           <div className="flex gap-2">
             <button
               onClick={() => setIsEditing(false)}
-              className="flex-1 btn-secondary text-green-400"
+              className="flex-1 btn-secondary"
             >
               Pronto
             </button>
