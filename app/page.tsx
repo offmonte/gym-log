@@ -181,7 +181,7 @@ export default function Home() {
                       return (
                         <div
                           key={set.setNumber}
-                          className="flex items-center justify-between py-2 px-3 bg-bg-tertiary/30 rounded-lg"
+                          className="flex items-center justify-between py-2 px-3 bg-tertiary/30 rounded-lg"
                         >
                           <div className="flex items-baseline gap-1">
                             <span className="font-semibold text-white text-lg">
