@@ -53,20 +53,20 @@ export default function ExerciseCard({
   };
 
   return (
-    <div className="card mb-4 md:mb-6 animate-slide-in">
+    <div className="card mb-4 sm:mb-5 md:mb-6 animate-slide-in">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4 md:mb-6">
-        <div className="flex-1">
-          <h3 className="text-lg md:text-xl font-semibold text-white">{exercise.name}</h3>
+      <div className="flex items-start justify-between mb-5 sm:mb-6 md:mb-7">
+        <div className="flex-1 min-w-0">
+          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white">{exercise.name}</h3>
           {lastDate && (
-            <p className="text-xs md:text-sm text-text-secondary mt-1">Último: {lastDate}</p>
+            <p className="text-xs sm:text-xs md:text-sm text-text-secondary mt-2">Último: {lastDate}</p>
           )}
         </div>
 
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="btn-secondary ml-2 md:ml-3 text-xs md:text-sm"
+            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2"
           >
             ✎
           </button>
@@ -74,7 +74,7 @@ export default function ExerciseCard({
       </div>
 
       {/* Sets */}
-      <div className="mb-4 md:mb-6 space-y-2 md:space-y-3">
+      <div className="mb-4 sm:mb-5 md:mb-6 space-y-3 sm:space-y-4 md:space-y-4">
         {exercise.sets.map((set, index) => (
           <SetRow
             key={index}
@@ -88,25 +88,25 @@ export default function ExerciseCard({
 
       {/* Edit Mode Actions */}
       {isEditing && (
-        <div className="space-y-3 md:space-y-4 border-t border-tertiary pt-4 md:pt-6">
+        <div className="space-y-3 sm:space-y-4 md:space-y-4 border-t border-tertiary pt-4 sm:pt-5 md:pt-6">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 md:py-4 font-semibold text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
+            className="w-full py-3 sm:py-3 md:py-4 font-semibold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
             style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
           >
             + Série
           </button>
 
-          <div className="flex gap-2 md:gap-3">
+          <div className="flex gap-2 sm:gap-3 md:gap-3">
             <button
               onClick={() => setIsEditing(false)}
-              className="flex-1 btn-secondary text-xs md:text-sm md:py-3"
+              className="flex-1 btn-secondary text-xs sm:text-sm md:text-base py-3"
             >
               Pronto
             </button>
             <button
               onClick={onDelete}
-              className="flex-1 btn-danger text-xs md:text-sm md:py-3"
+              className="flex-1 btn-danger text-xs sm:text-sm md:text-base py-3"
             >
               Deletar
             </button>
