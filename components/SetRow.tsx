@@ -47,7 +47,7 @@ export default function SetRow({
           {/* Weight input */}
           <div className="col-span-5 md:col-span-5">
             <p className="md:hidden text-xs text-text-secondary mb-2">Carga</p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
               <input
                 type="number"
                 step="0.5"
@@ -59,10 +59,10 @@ export default function SetRow({
                   })
                 }
                 placeholder="0"
-                className="flex-1 text-center text-base font-semibold"
+                className="w-full sm:flex-1 text-center text-base font-semibold"
                 inputMode="decimal"
               />
-              <span className="text-text-secondary font-medium text-xs sm:text-sm md:text-sm">kg</span>
+              <span className="text-text-secondary font-medium text-xs sm:text-sm md:text-sm text-center">kg</span>
             </div>
           </div>
 
