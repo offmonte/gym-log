@@ -53,20 +53,20 @@ export default function ExerciseCard({
   };
 
   return (
-    <div className="card mb-4 animate-slide-in">
+    <div className="card mb-4 md:mb-6 animate-slide-in">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-4 md:mb-6">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-white">{exercise.name}</h3>
+          <h3 className="text-lg md:text-xl font-semibold text-white">{exercise.name}</h3>
           {lastDate && (
-            <p className="text-sm text-text-secondary mt-1">Último: {lastDate}</p>
+            <p className="text-xs md:text-sm text-text-secondary mt-1">Último: {lastDate}</p>
           )}
         </div>
-        
+
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="btn-secondary ml-2 text-sm"
+            className="btn-secondary ml-2 md:ml-3 text-xs md:text-sm"
           >
             ✎
           </button>
@@ -74,7 +74,7 @@ export default function ExerciseCard({
       </div>
 
       {/* Sets */}
-      <div className="mb-4">
+      <div className="mb-4 md:mb-6 space-y-2 md:space-y-3">
         {exercise.sets.map((set, index) => (
           <SetRow
             key={index}
@@ -88,25 +88,25 @@ export default function ExerciseCard({
 
       {/* Edit Mode Actions */}
       {isEditing && (
-        <div className="space-y-3 border-t border-tertiary pt-4">
+        <div className="space-y-3 md:space-y-4 border-t border-tertiary pt-4 md:pt-6">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 font-semibold text-sm hover:opacity-80 transition-all rounded-lg"
+            className="w-full py-3 md:py-4 font-semibold text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
             style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
           >
             + Série
           </button>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 md:gap-3">
             <button
               onClick={() => setIsEditing(false)}
-              className="flex-1 btn-secondary"
+              className="flex-1 btn-secondary text-xs md:text-sm md:py-3"
             >
               Pronto
             </button>
             <button
               onClick={onDelete}
-              className="flex-1 btn-danger text-sm"
+              className="flex-1 btn-danger text-xs md:text-sm md:py-3"
             >
               Deletar
             </button>
