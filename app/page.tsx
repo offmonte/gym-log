@@ -115,199 +115,211 @@ export default function Home() {
     <div className="bg-primary min-h-screen">
       {/* WORKOUT TAB */}
       {activeTab === 'workout' && (
-        <div className="px-4 md:px-8 py-6 md:py-8 max-w-3xl lg:max-w-5xl mx-auto">
-          {/* Header */}
-          <div className="mb-8 md:mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-white">💪 Gym Log</h1>
-            <p className="text-text-secondary mt-2 text-sm md:text-base">
-              {currentDayOfWeek} • {currentFormattedDate}
-            </p>
-          </div>
+        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
+          <div className="w-full max-w-4xl">
+            {/* Header */}
+            <div className="mb-6 sm:mb-8 md:mb-10">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">💪 Gym Log</h1>
+              <p className="text-text-secondary mt-2 text-sm sm:text-base md:text-base">
+                {currentDayOfWeek} • {currentFormattedDate}
+              </p>
+            </div>
 
-          {/* Workout info card */}
-          <div className="card mb-6 md:mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">
-                  Data
-                </label>
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full text-base"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">
-                  Treino (opcional)
-                </label>
-                <input
-                  type="text"
-                  value={workoutName}
-                  onChange={(e) => setWorkoutName(e.target.value)}
-                  placeholder="Ex: Peito e Tríceps"
-                  className="w-full text-base"
-                />
+            {/* Workout info card */}
+            <div className="card mb-6 sm:mb-8 md:mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
+                    Data
+                  </label>
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="w-full text-base"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
+                    Treino (opcional)
+                  </label>
+                  <input
+                    type="text"
+                    value={workoutName}
+                    onChange={(e) => setWorkoutName(e.target.value)}
+                    placeholder="Ex: Peito e Tríceps"
+                    className="w-full text-base"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Exercise form */}
-          <ExerciseForm onAddExercise={handleAddExercise} />
+            {/* Spacer */}
+            <div className="h-2 sm:h-3 md:h-4" />
 
-          {/* Current exercises section */}
-          {currentWorkout.exercises.length > 0 && (
-            <div className="mb-8 md:mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
-                Exercícios de Hoje
-              </h2>
+            {/* Exercise form */}
+            <ExerciseForm onAddExercise={handleAddExercise} />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6">
-                {currentWorkout.exercises.map((exercise, index) => (
-                  <div key={index} className="card">
-                    <h3 className="text-lg md:text-xl font-semibold text-white mb-4 md:mb-6">
-                      {exercise.name}
-                    </h3>
+            {/* Spacer */}
+            <div className="h-2 sm:h-3 md:h-4" />
 
-                    <div className="space-y-2 md:space-y-3">
-                      {exercise.sets.map((set) => {
-                        const getComparisonIcon = (comp?: string) => {
-                          switch (comp) {
-                            case 'up': return '↑';
-                            case 'down': return '↓';
-                            case 'equal': return '=';
-                            case 'new': return 'NEW';
-                            default: return '';
-                          }
-                        };
+            {/* Current exercises section */}
+            {currentWorkout.exercises.length > 0 && (
+              <div className="mb-8 sm:mb-10 md:mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-6 md:mb-8">
+                  Exercícios de Hoje
+                </h2>
 
-                        const getComparisonColor = (comp?: string) => {
-                          switch (comp) {
-                            case 'up': return 'text-up';
-                            case 'down': return 'text-down';
-                            case 'equal': return 'text-equal';
-                            case 'new': return 'text-new';
-                            default: return '';
-                          }
-                        };
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                  {currentWorkout.exercises.map((exercise, index) => (
+                    <div key={index} className="card">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-5 sm:mb-6 md:mb-7">
+                        {exercise.name}
+                      </h3>
 
-                        return (
-                          <div
-                            key={set.setNumber}
-                            className="flex items-center justify-between py-2 md:py-3 px-3 md:px-4 bg-tertiary/20 rounded-lg"
-                          >
-                            <div className="flex items-baseline gap-1 md:gap-2 flex-1">
-                              <span className="text-sm md:text-base text-text-secondary">
-                                Série {set.setNumber}:
-                              </span>
-                              <span className="text-lg md:text-xl font-semibold text-white">
-                                {set.weight}
-                              </span>
-                              <span className="text-sm md:text-base text-text-secondary">kg</span>
-                              <span className="text-text-secondary mx-1">×</span>
-                              <span className="text-lg md:text-xl font-semibold text-white">
-                                {set.reps}
-                              </span>
-                              <span className="text-sm md:text-base text-text-secondary">reps</span>
-                            </div>
+                      <div className="space-y-3 sm:space-y-4 md:space-y-4">
+                        {exercise.sets.map((set) => {
+                          const getComparisonIcon = (comp?: string) => {
+                            switch (comp) {
+                              case 'up': return '↑';
+                              case 'down': return '↓';
+                              case 'equal': return '=';
+                              case 'new': return 'NEW';
+                              default: return '';
+                            }
+                          };
 
+                          const getComparisonColor = (comp?: string) => {
+                            switch (comp) {
+                              case 'up': return 'text-up';
+                              case 'down': return 'text-down';
+                              case 'equal': return 'text-equal';
+                              case 'new': return 'text-new';
+                              default: return '';
+                            }
+                          };
+
+                          return (
                             <div
-                              className={`flex-shrink-0 ml-2 md:ml-4 text-2xl md:text-3xl font-bold ${getComparisonColor(
-                                set.comparison
-                              )}`}
+                              key={set.setNumber}
+                              className="flex items-center justify-between py-3 sm:py-4 md:py-4 px-3 sm:px-4 md:px-5 bg-tertiary/20 rounded-lg"
                             >
-                              {set.comparison === 'new' ? (
-                                <span className="text-xs md:text-sm font-bold">
-                                  {getComparisonIcon(set.comparison)}
+                              <div className="flex items-baseline gap-2 sm:gap-2 md:gap-3 flex-1 min-w-0">
+                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">
+                                  Série {set.setNumber}:
                                 </span>
-                              ) : (
-                                getComparisonIcon(set.comparison)
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                  {set.weight}
+                                </span>
+                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">kg</span>
+                                <span className="text-text-secondary mx-1 md:mx-2 shrink-0">×</span>
+                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                  {set.reps}
+                                </span>
+                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">reps</span>
+                              </div>
 
-          {/* Empty state */}
-          {currentWorkout.exercises.length === 0 && (
-            <div className="card text-center py-12 md:py-16">
-              <p className="text-text-secondary text-base md:text-lg">
-                Nenhum exercício adicionado
-              </p>
-              <p className="text-text-tertiary text-sm md:text-base mt-2">
-                Adicione um exercício acima para começar
-              </p>
-            </div>
-          )}
+                              <div
+                                className={`flex-shrink-0 ml-3 sm:ml-4 md:ml-5 text-xl sm:text-2xl md:text-3xl font-bold ${getComparisonColor(
+                                  set.comparison
+                                )}`}
+                              >
+                                {set.comparison === 'new' ? (
+                                  <span className="text-xs sm:text-xs md:text-sm font-bold">
+                                    {getComparisonIcon(set.comparison)}
+                                  </span>
+                                ) : (
+                                  getComparisonIcon(set.comparison)
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Empty state */}
+            {currentWorkout.exercises.length === 0 && (
+              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
+                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+                  Nenhum exercício adicionado
+                </p>
+                <p className="text-text-tertiary text-xs sm:text-sm md:text-base mt-2 sm:mt-3">
+                  Adicione um exercício acima para começar
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
       {/* HISTORY TAB */}
       {activeTab === 'history' && (
-        <div className="px-4 md:px-8 py-6 md:py-8 max-w-3xl lg:max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8">
-            📅 Histórico
-          </h1>
+        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
+          <div className="w-full max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
+              📅 Histórico
+            </h1>
 
-          {sortedWorkouts.length === 0 ? (
-            <div className="card text-center py-12 md:py-16">
-              <p className="text-text-secondary text-base md:text-lg">
-                Nenhum treino registrado
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 md:space-y-6">
-              {sortedWorkouts.map((workout) => (
-                <WorkoutCard
-                  key={workout.id}
-                  workout={workout}
-                  onUpdate={handleUpdateWorkout}
-                  onDelete={() => handleDeleteWorkout(workout.id)}
-                  isExpanded={expandedWorkouts.has(workout.id)}
-                  onToggleExpanded={() => toggleWorkoutExpanded(workout.id)}
-                />
-              ))}
-            </div>
-          )}
+            {sortedWorkouts.length === 0 ? (
+              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
+                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+                  Nenhum treino registrado
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4 sm:space-y-5 md:space-y-6">
+                {sortedWorkouts.map((workout) => (
+                  <WorkoutCard
+                    key={workout.id}
+                    workout={workout}
+                    onUpdate={handleUpdateWorkout}
+                    onDelete={() => handleDeleteWorkout(workout.id)}
+                    isExpanded={expandedWorkouts.has(workout.id)}
+                    onToggleExpanded={() => toggleWorkoutExpanded(workout.id)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
       {/* SETTINGS TAB */}
       {activeTab === 'settings' && (
-        <div className="px-4 md:px-8 py-6 md:py-8 max-w-3xl lg:max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8">
-            ⚙️ Ajustes
-          </h1>
+        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
+          <div className="w-full max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
+              ⚙️ Ajustes
+            </h1>
 
-          <div className="card">
-            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">Sobre</h3>
-            <p className="text-text-secondary text-sm md:text-base mb-6">
-              Gym Log v1.0 - Seu companheiro de treino na academia
-            </p>
+            <div className="card">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Sobre</h3>
+              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
+                Gym Log v1.0 - Seu companheiro de treino na academia
+              </p>
 
-            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">Armazenamento</h3>
-            <p className="text-text-secondary text-sm md:text-base mb-4">
-              Total de treinos: {workouts.length}
-            </p>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Armazenamento</h3>
+              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-5 sm:mb-6">
+                Total de treinos: {workouts.length}
+              </p>
 
-            <button
-              onClick={() => {
-                if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
-                  localStorage.removeItem('gymlog_workouts');
-                  setWorkouts([]);
-                }
-              }}
-              className="w-full md:w-64 py-3 btn-danger text-sm md:text-base"
-            >
-              Limpar Dados
-            </button>
+              <button
+                onClick={() => {
+                  if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
+                    localStorage.removeItem('gymlog_workouts');
+                    setWorkouts([]);
+                  }
+                }}
+                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
+              >
+                Limpar Dados
+              </button>
+            </div>
           </div>
         </div>
       )}

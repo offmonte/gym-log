@@ -35,11 +35,11 @@ export default function SetRow({
   return (
     <div className="animate-slide-in">
       {isEditing ? (
-        <div className="grid grid-cols-12 gap-2 md:gap-3 p-4 bg-tertiary/30 rounded-lg items-end">
+        <div className="grid grid-cols-12 gap-2 sm:gap-3 md:gap-3 p-3 sm:p-4 md:p-4 bg-tertiary/30 rounded-lg items-end">
           {/* Serie number */}
           <div className="col-span-2 md:col-span-2">
             <p className="md:hidden text-xs text-text-secondary mb-2">Série</p>
-            <div className="text-center font-semibold text-text-secondary text-lg">
+            <div className="text-center font-semibold text-text-secondary text-base">
               {set.setNumber}ª
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function SetRow({
           {/* Weight input */}
           <div className="col-span-5 md:col-span-5">
             <p className="md:hidden text-xs text-text-secondary mb-2">Carga</p>
-            <div className="flex items-center gap-2">
+            <div className="relative flex items-center">
               <input
                 type="number"
                 step="0.5"
@@ -59,10 +59,10 @@ export default function SetRow({
                   })
                 }
                 placeholder="0"
-                className="flex-1 text-center text-lg font-semibold"
+                className="w-full text-center text-base font-semibold pr-8"
                 inputMode="decimal"
               />
-              <span className="text-text-secondary font-medium text-sm md:text-base">kg</span>
+              <span className="absolute right-3 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
             </div>
           </div>
 
@@ -79,7 +79,7 @@ export default function SetRow({
                 })
               }
               placeholder="0"
-              className="w-full text-center text-lg font-semibold"
+              className="w-full text-center text-base font-semibold"
               inputMode="numeric"
             />
           </div>
@@ -87,7 +87,7 @@ export default function SetRow({
           {/* Delete button */}
           <button
             onClick={onDelete}
-            className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
+            className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 sm:h-11 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
             style={{
               backgroundColor: 'rgba(239, 68, 68, 0.2)',
               color: 'var(--color-down)',
@@ -97,23 +97,23 @@ export default function SetRow({
           </button>
         </div>
       ) : (
-        <div className="flex items-center justify-between py-3 md:py-4 px-4 md:px-5 bg-tertiary/20 rounded-lg">
+        <div className="flex items-center justify-between py-3 sm:py-4 md:py-4 px-3 sm:px-4 md:px-5 bg-tertiary/20 rounded-lg">
           {/* Left side - series info */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-1 md:gap-2 flex-wrap">
-              <span className="text-xs md:text-sm text-text-secondary">Série {set.setNumber}:</span>
-              <span className="text-base md:text-lg font-semibold text-white">{set.weight}</span>
-              <span className="text-xs md:text-sm text-text-secondary">kg</span>
-              <span className="text-text-secondary mx-0.5 md:mx-1">×</span>
-              <span className="text-base md:text-lg font-semibold text-white">{set.reps}</span>
-              <span className="text-xs md:text-sm text-text-secondary">reps</span>
+            <div className="flex items-baseline gap-2 sm:gap-2 md:gap-3 flex-wrap">
+              <span className="text-xs sm:text-sm md:text-sm text-text-secondary shrink-0">Série {set.setNumber}:</span>
+              <span className="text-base sm:text-lg md:text-lg font-semibold text-white">{set.weight}</span>
+              <span className="text-xs sm:text-sm md:text-sm text-text-secondary shrink-0">kg</span>
+              <span className="text-text-secondary mx-1 md:mx-2 shrink-0">×</span>
+              <span className="text-base sm:text-lg md:text-lg font-semibold text-white">{set.reps}</span>
+              <span className="text-xs sm:text-sm md:text-sm text-text-secondary shrink-0">reps</span>
             </div>
           </div>
 
           {/* Right side - indicator */}
-          <div className={`flex-shrink-0 ml-2 md:ml-4 text-xl md:text-2xl font-bold ${comparison.className}`}>
+          <div className={`flex-shrink-0 ml-3 sm:ml-4 md:ml-5 text-xl sm:text-2xl md:text-2xl font-bold ${comparison.className}`}>
             {comparison.icon === 'NEW' ? (
-              <span className="text-xs font-bold">{comparison.icon}</span>
+              <span className="text-xs sm:text-xs md:text-sm font-bold">{comparison.icon}</span>
             ) : (
               comparison.icon
             )}
