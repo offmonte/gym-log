@@ -85,7 +85,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
           {sets.map((set, index) => (
             <div
               key={index}
-              className="flex items-end gap-2 p-4 bg-bg-tertiary/30 rounded-lg"
+              className="flex items-end gap-2 p-4 bg-tertiary/30 rounded-lg"
             >
               {/* Serie number - fixed width */}
               <div className="w-12 flex-shrink-0">
