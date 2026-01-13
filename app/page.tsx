@@ -113,7 +113,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <div className="bg-primary min-h-screen">
       {/* WORKOUT TAB */}
       {activeTab === 'workout' && (
         <div className="px-4 py-6 max-w-2xl mx-auto">
