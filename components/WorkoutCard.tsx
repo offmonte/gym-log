@@ -40,33 +40,38 @@ export default function WorkoutCard({
   };
 
   return (
-    <div className="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden mb-4">
+    <div className="card mb-4 cursor-pointer transition-all animate-slide-in">
       <button
         onClick={onToggleExpanded}
-        className="w-full px-4 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+        className="w-full text-left"
       >
-        <div className="text-left">
-          <h2 className="text-lg font-bold text-gray-800">
-            {dayOfWeek} — {formattedDate}
-          </h2>
-          {workout.name && (
-            <p className="text-sm text-gray-600 mt-1">Treino: {workout.name}</p>
-          )}
-          <p className="text-xs text-gray-500 mt-1">
-            {workout.exercises.length} exercício(s)
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-white">
+              {dayOfWeek} • {formattedDate}
+            </h2>
+            {workout.name && (
+              <p className="text-sm text-text-secondary mt-1">{workout.name}</p>
+            )}
+            <p className="text-xs text-text-tertiary mt-2">
+              {workout.exercises.length} exercício(s)
+            </p>
+          </div>
+          <div className="text-2xl text-text-secondary transition-transform">
+            {isExpanded ? '▼' : '▶'}
+          </div>
         </div>
-        <span className="text-2xl text-gray-600">
-          {isExpanded ? '▼' : '▶'}
-        </span>
       </button>
 
+      {/* Expanded content */}
       {isExpanded && (
-        <div className="bg-gray-50 px-4 py-4 border-t border-gray-200">
+        <div className="mt-6 border-t border-bg-tertiary pt-6 space-y-4">
           {workout.exercises.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">Nenhum exercício registrado</p>
+            <p className="text-center text-text-secondary text-sm py-4">
+              Nenhum exercício
+            </p>
           ) : (
-            <div>
+            <>
               {workout.exercises.map((exercise, index) => (
                 <ExerciseCard
                   key={index}
@@ -75,19 +80,19 @@ export default function WorkoutCard({
                     handleUpdateExercise(index, updatedExercise)
                   }
                   onDelete={() => handleDeleteExercise(index)}
+                  lastDate={formatDateForDisplay(workout.date)}
                 />
               ))}
-            </div>
+            </>
           )}
 
-          <div className="flex gap-2 mt-4">
-            <button
-              onClick={onDelete}
-              className="flex-1 py-2 bg-red-100 text-red-700 rounded-lg font-semibold hover:bg-red-200"
-            >
-              Deletar Treino
-            </button>
-          </div>
+          {/* Delete workout button */}
+          <button
+            onClick={onDelete}
+            className="w-full mt-6 py-3 btn-danger text-sm"
+          >
+            Deletar Treino
+          </button>
         </div>
       )}
     </div>
