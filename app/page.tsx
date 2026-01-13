@@ -253,63 +253,67 @@ export default function Home() {
 
       {/* HISTORY TAB */}
       {activeTab === 'history' && (
-        <div className="px-4 md:px-8 py-6 md:py-8 max-w-3xl lg:max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8">
-            📅 Histórico
-          </h1>
+        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
+          <div className="w-full max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
+              📅 Histórico
+            </h1>
 
-          {sortedWorkouts.length === 0 ? (
-            <div className="card text-center py-12 md:py-16">
-              <p className="text-text-secondary text-base md:text-lg">
-                Nenhum treino registrado
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 md:space-y-6">
-              {sortedWorkouts.map((workout) => (
-                <WorkoutCard
-                  key={workout.id}
-                  workout={workout}
-                  onUpdate={handleUpdateWorkout}
-                  onDelete={() => handleDeleteWorkout(workout.id)}
-                  isExpanded={expandedWorkouts.has(workout.id)}
-                  onToggleExpanded={() => toggleWorkoutExpanded(workout.id)}
-                />
-              ))}
-            </div>
-          )}
+            {sortedWorkouts.length === 0 ? (
+              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
+                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+                  Nenhum treino registrado
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4 sm:space-y-5 md:space-y-6">
+                {sortedWorkouts.map((workout) => (
+                  <WorkoutCard
+                    key={workout.id}
+                    workout={workout}
+                    onUpdate={handleUpdateWorkout}
+                    onDelete={() => handleDeleteWorkout(workout.id)}
+                    isExpanded={expandedWorkouts.has(workout.id)}
+                    onToggleExpanded={() => toggleWorkoutExpanded(workout.id)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
       {/* SETTINGS TAB */}
       {activeTab === 'settings' && (
-        <div className="px-4 md:px-8 py-6 md:py-8 max-w-3xl lg:max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8">
-            ⚙️ Ajustes
-          </h1>
+        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
+          <div className="w-full max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
+              ⚙️ Ajustes
+            </h1>
 
-          <div className="card">
-            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">Sobre</h3>
-            <p className="text-text-secondary text-sm md:text-base mb-6">
-              Gym Log v1.0 - Seu companheiro de treino na academia
-            </p>
+            <div className="card">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Sobre</h3>
+              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
+                Gym Log v1.0 - Seu companheiro de treino na academia
+              </p>
 
-            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">Armazenamento</h3>
-            <p className="text-text-secondary text-sm md:text-base mb-4">
-              Total de treinos: {workouts.length}
-            </p>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Armazenamento</h3>
+              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-5 sm:mb-6">
+                Total de treinos: {workouts.length}
+              </p>
 
-            <button
-              onClick={() => {
-                if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
-                  localStorage.removeItem('gymlog_workouts');
-                  setWorkouts([]);
-                }
-              }}
-              className="w-full md:w-64 py-3 btn-danger text-sm md:text-base"
-            >
-              Limpar Dados
-            </button>
+              <button
+                onClick={() => {
+                  if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
+                    localStorage.removeItem('gymlog_workouts');
+                    setWorkouts([]);
+                  }
+                }}
+                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
+              >
+                Limpar Dados
+              </button>
+            </div>
           </div>
         </div>
       )}
