@@ -17,23 +17,27 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-secondary border-t border-tertiary">
+    <nav
+      className="fixed bottom-0 left-0 right-0 border-t"
+      style={{
+        backgroundColor: 'var(--bg-secondary)',
+        borderColor: 'var(--bg-tertiary)',
+      }}
+    >
       <div className="flex justify-around items-center h-20">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center justify-center flex-1 h-full transition-all ${
-              activeTab === tab.id
-                ? 'text-blue-400'
-                : 'text-text-secondary'
-            }`}
+            className="flex flex-col items-center justify-center flex-1 h-full transition-all text-xs font-medium"
             style={{
-              backgroundColor: activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+              color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
+              backgroundColor:
+                activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
             }}
           >
             <span className="text-2xl mb-1">{tab.icon}</span>
-            <span className="text-xs font-medium">{tab.label}</span>
+            <span>{tab.label}</span>
           </button>
         ))}
       </div>
