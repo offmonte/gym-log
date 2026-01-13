@@ -92,7 +92,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         </label>
 
         {/* Column headers for desktop/tablet */}
-        <div className="hidden md:grid grid-cols-12 gap-3 mb-3">
+        <div className="hidden md:grid grid-cols-12 gap-3 mb-4">
           <div className="col-span-2 text-xs font-medium text-text-tertiary">
             Série
           </div>
