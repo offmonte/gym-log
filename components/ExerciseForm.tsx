@@ -135,7 +135,8 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index)}
-                  className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-red-500/20 text-down font-bold hover:bg-red-500/30 transition-all mb-3"
+                  className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg font-bold hover:opacity-80 transition-all mb-3"
+                  style={{ backgroundColor: 'rgba(239, 68, 68, 0.2)', color: 'var(--color-down)' }}
                 >
                   ✕
                 </button>
