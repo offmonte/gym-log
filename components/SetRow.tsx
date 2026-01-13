@@ -97,23 +97,23 @@ export default function SetRow({
           </button>
         </div>
       ) : (
-        <div className="flex items-center justify-between py-3 px-4 bg-tertiary/20 rounded-lg">
+        <div className="flex items-center justify-between py-3 md:py-4 px-4 md:px-5 bg-tertiary/20 rounded-lg">
           {/* Left side - series info */}
-          <div className="flex-1">
-            <div className="flex items-baseline gap-1 md:gap-2">
-              <span className="text-sm md:text-base text-text-secondary">Série {set.setNumber}:</span>
-              <span className="text-lg md:text-xl font-semibold text-white">{set.weight}</span>
-              <span className="text-sm md:text-base text-text-secondary">kg</span>
-              <span className="text-text-secondary mx-1">×</span>
-              <span className="text-lg md:text-xl font-semibold text-white">{set.reps}</span>
-              <span className="text-sm md:text-base text-text-secondary">reps</span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-baseline gap-1 md:gap-2 flex-wrap">
+              <span className="text-xs md:text-sm text-text-secondary">Série {set.setNumber}:</span>
+              <span className="text-base md:text-lg font-semibold text-white">{set.weight}</span>
+              <span className="text-xs md:text-sm text-text-secondary">kg</span>
+              <span className="text-text-secondary mx-0.5 md:mx-1">×</span>
+              <span className="text-base md:text-lg font-semibold text-white">{set.reps}</span>
+              <span className="text-xs md:text-sm text-text-secondary">reps</span>
             </div>
           </div>
 
           {/* Right side - indicator */}
-          <div className={`flex-shrink-0 ml-3 text-2xl md:text-3xl font-bold ${comparison.className}`}>
+          <div className={`flex-shrink-0 ml-2 md:ml-4 text-xl md:text-2xl font-bold ${comparison.className}`}>
             {comparison.icon === 'NEW' ? (
-              <span className="text-xs md:text-sm font-bold">{comparison.icon}</span>
+              <span className="text-xs font-bold">{comparison.icon}</span>
             ) : (
               comparison.icon
             )}
