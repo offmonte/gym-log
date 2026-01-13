@@ -9,9 +9,12 @@ import {
   addComparisons,
   generateId,
   getTodayDate,
+  getDayOfWeek,
+  formatDateForDisplay,
 } from '@/lib/workoutUtils';
 import WorkoutCard from '@/components/WorkoutCard';
 import ExerciseForm from '@/components/ExerciseForm';
+import BottomNav, { NavTab } from '@/components/BottomNav';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -19,15 +22,15 @@ export default function Home() {
   const [workoutName, setWorkoutName] = useState('');
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<NavTab>('workout');
 
-  // Load workouts from Local Storage on mount
+  // Load workouts from Local Storage
   useEffect(() => {
     const loadedWorkouts = getWorkouts();
     setWorkouts(loadedWorkouts);
     setIsLoading(false);
   }, []);
 
-  // Get current workout or create new one
   const getCurrentWorkout = (): Workout => {
     const existing = workouts.find(w => w.date === selectedDate);
     if (existing) return existing;
@@ -42,14 +45,9 @@ export default function Home() {
 
   const handleAddExercise = (exercise: Exercise) => {
     const currentWorkout = getCurrentWorkout();
-
-    // Find last execution of this exercise
     const lastExercise = findLastExercise(exercise.name, selectedDate);
-
-    // Add comparisons to the exercise
     const exerciseWithComparisons = addComparisons(exercise, lastExercise);
 
-    // Check if exercise already exists in current workout
     const existingIndex = currentWorkout.exercises.findIndex(
       e => e.name.toLowerCase() === exercise.name.toLowerCase()
     );
@@ -84,11 +82,6 @@ export default function Home() {
     const updatedExpandedWorkouts = new Set(expandedWorkouts);
     updatedExpandedWorkouts.delete(workoutId);
     setExpandedWorkouts(updatedExpandedWorkouts);
-    getWorkouts().forEach((w) => {
-      if (w.id !== workoutId) {
-        saveWorkout(w);
-      }
-    });
     localStorage.setItem('gymlog_workouts', JSON.stringify(updatedWorkouts));
     setWorkouts(updatedWorkouts);
   };
@@ -103,162 +96,130 @@ export default function Home() {
     setExpandedWorkouts(newExpanded);
   };
 
-  // Sort workouts by date descending
   const sortedWorkouts = [...workouts].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   const currentWorkout = getCurrentWorkout();
+  const currentDayOfWeek = getDayOfWeek(selectedDate);
+  const currentFormattedDate = formatDateForDisplay(selectedDate);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <p className="text-gray-600">Carregando...</p>
+      <div className="min-h-screen bg-primary flex items-center justify-center">
+        <p className="text-text-secondary">Carregando...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-6 px-4 sm:px-6">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">💪 GymLog</h1>
-          <p className="text-gray-600">Monitore seus treinos e veja seu progresso</p>
-        </div>
-
-        {/* Date and Name Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 border border-blue-200">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">Nova Sessão de Treino</h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Data
-              </label>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nome do Treino (Opcional)
-              </label>
-              <input
-                type="text"
-                value={workoutName}
-                onChange={(e) => setWorkoutName(e.target.value)}
-                placeholder="Ex: Peito e Tríceps"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+    <div className="bg-primary min-h-screen">
+      {/* WORKOUT TAB */}
+      {activeTab === 'workout' && (
+        <div className="px-4 py-6 max-w-2xl mx-auto">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-white">💪 Gym Log</h1>
+            <p className="text-text-secondary mt-2">
+              {currentDayOfWeek} • {currentFormattedDate}
+            </p>
           </div>
 
+          {/* Workout date and name inputs */}
+          <div className="card mb-6">
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              className="w-full mb-4 text-base"
+            />
+            <input
+              type="text"
+              value={workoutName}
+              onChange={(e) => setWorkoutName(e.target.value)}
+              placeholder="Nome do treino (opcional)"
+              className="w-full text-base"
+            />
+          </div>
+
+          {/* Exercise form */}
+          <ExerciseForm onAddExercise={handleAddExercise} />
+
+          {/* Current exercises */}
           {currentWorkout.exercises.length > 0 && (
-            <p className="text-sm text-gray-600">
-              {currentWorkout.exercises.length} exercício(s) adicionado(s)
-            </p>
-          )}
-        </div>
-
-        {/* Exercise Form */}
-        <ExerciseForm onAddExercise={handleAddExercise} />
-
-        {/* Current Workout Exercises */}
-        {currentWorkout.exercises.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8 border border-green-200">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Exercícios de Hoje
-            </h2>
-            {currentWorkout.exercises.map((exercise, index) => (
-              <div
-                key={index}
-                className="bg-gray-50 rounded-lg p-4 mb-4 last:mb-0"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-800">
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold text-white mb-4">
+                Exercícios de Hoje
+              </h2>
+              {currentWorkout.exercises.map((exercise, index) => (
+                <div key={index} className="card mb-4">
+                  <h3 className="text-lg font-semibold text-white mb-4">
                     {exercise.name}
                   </h3>
-                </div>
+                  <div className="space-y-3">
+                    {exercise.sets.map((set) => {
+                      const getComparisonIcon = (comp?: string) => {
+                        switch (comp) {
+                          case 'up': return '↑';
+                          case 'down': return '↓';
+                          case 'equal': return '=';
+                          case 'new': return 'NEW';
+                          default: return '';
+                        }
+                      };
 
-                <div className="space-y-2">
-                  {exercise.sets.map((set) => {
-                    const getComparisonColor = (comparison?: string) => {
-                      switch (comparison) {
-                        case 'up':
-                          return 'text-green-600 font-bold';
-                        case 'down':
-                          return 'text-red-600 font-bold';
-                        case 'equal':
-                          return 'text-gray-400 font-bold';
-                        case 'new':
-                          return 'text-blue-600 font-bold';
-                        default:
-                          return '';
-                      }
-                    };
+                      const getComparisonColor = (comp?: string) => {
+                        switch (comp) {
+                          case 'up': return 'text-up';
+                          case 'down': return 'text-down';
+                          case 'equal': return 'text-equal';
+                          case 'new': return 'text-new';
+                          default: return '';
+                        }
+                      };
 
-                    const getComparisonIcon = (comparison?: string) => {
-                      switch (comparison) {
-                        case 'up':
-                          return '↑';
-                        case 'down':
-                          return '↓';
-                        case 'equal':
-                          return '=';
-                        case 'new':
-                          return 'NEW';
-                        default:
-                          return '';
-                      }
-                    };
-
-                    return (
-                      <div
-                        key={set.setNumber}
-                        className="flex items-center justify-between py-2 px-3 bg-white rounded border border-gray-200"
-                      >
-                        <span className="text-sm text-gray-600">
-                          Série {set.setNumber}: {set.weight}kg × {set.reps} reps
-                        </span>
-                        <span
-                          className={`text-lg ${getComparisonColor(
-                            set.comparison
-                          )}`}
+                      return (
+                        <div
+                          key={set.setNumber}
+                          className="flex items-center justify-between py-2 px-3 bg-bg-tertiary/30 rounded-lg"
                         >
-                          {set.comparison === 'new' ? (
-                            <span className="text-xs font-bold">
-                              {getComparisonIcon(set.comparison)}
+                          <div className="flex items-baseline gap-1">
+                            <span className="font-semibold text-white text-lg">
+                              {set.weight}
                             </span>
-                          ) : (
-                            getComparisonIcon(set.comparison)
-                          )}
-                        </span>
-                      </div>
-                    );
-                  })}
+                            <span className="text-sm text-text-secondary">kg</span>
+                            <span className="text-text-secondary mx-1">×</span>
+                            <span className="font-semibold text-white text-lg">
+                              {set.reps}
+                            </span>
+                            <span className="text-sm text-text-secondary">reps</span>
+                          </div>
+                          <span className={`text-2xl font-bold ${getComparisonColor(set.comparison)}`}>
+                            {set.comparison === 'new' ? (
+                              <span className="text-xs">{getComparisonIcon(set.comparison)}</span>
+                            ) : (
+                              getComparisonIcon(set.comparison)
+                            )}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
-        {/* Workouts List */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            📋 Histórico de Treinos
-          </h2>
+      {/* HISTORY TAB */}
+      {activeTab === 'history' && (
+        <div className="px-4 py-6 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-6">📅 Histórico</h1>
 
           {sortedWorkouts.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center border border-gray-200">
-              <p className="text-gray-500 mb-2">Nenhum treino registrado</p>
-              <p className="text-gray-400 text-sm">
-                Comece adicionando exercícios acima
-              </p>
+            <div className="card text-center py-12">
+              <p className="text-text-secondary">Nenhum treino registrado</p>
             </div>
           ) : (
             <div>
@@ -275,7 +236,41 @@ export default function Home() {
             </div>
           )}
         </div>
-      </div>
+      )}
+
+      {/* SETTINGS TAB */}
+      {activeTab === 'settings' && (
+        <div className="px-4 py-6 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-6">⚙️ Ajustes</h1>
+          
+          <div className="card">
+            <h3 className="text-lg font-semibold text-white mb-4">Sobre</h3>
+            <p className="text-text-secondary text-sm mb-6">
+              Gym Log v1.0 - Seu companheiro de treino na academia
+            </p>
+            
+            <h3 className="text-lg font-semibold text-white mb-4">Armazenamento</h3>
+            <p className="text-text-secondary text-sm mb-4">
+              Total de treinos: {workouts.length}
+            </p>
+            
+            <button
+              onClick={() => {
+                if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
+                  localStorage.removeItem('gymlog_workouts');
+                  setWorkouts([]);
+                }
+              }}
+              className="w-full py-3 btn-danger text-sm"
+            >
+              Limpar Dados
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Navigation */}
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   );
 }
