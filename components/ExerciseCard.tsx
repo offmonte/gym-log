@@ -1,0 +1,118 @@
+'use client';
+
+import { Exercise } from '@/lib/types';
+import SetRow from './SetRow';
+import { useState } from 'react';
+
+interface ExerciseCardProps {
+  exercise: Exercise;
+  onUpdate: (exercise: Exercise) => void;
+  onDelete: () => void;
+  lastDate?: string;
+}
+
+export default function ExerciseCard({
+  exercise,
+  onUpdate,
+  onDelete,
+  lastDate,
+}: ExerciseCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleAddSet = () => {
+    const newSetNumber = exercise.sets.length + 1;
+    const newSet = {
+      setNumber: newSetNumber,
+      weight: 0,
+      reps: 0,
+    };
+    onUpdate({
+      ...exercise,
+      sets: [...exercise.sets, newSet],
+    });
+  };
+
+  const handleDeleteSet = (index: number) => {
+    const newSets = exercise.sets.filter((_, i) => i !== index);
+    onUpdate({
+      ...exercise,
+      sets: newSets.map((set, i) => ({
+        ...set,
+        setNumber: i + 1,
+      })),
+    });
+  };
+
+  const handleUpdateSet = (index: number, updatedSet: any) => {
+    const newSets = [...exercise.sets];
+    newSets[index] = updatedSet;
+    onUpdate({
+      ...exercise,
+      sets: newSets,
+    });
+  };
+
+  return (
+    <div className="card mb-4 md:mb-6 animate-slide-in">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4 md:mb-6">
+        <div className="flex-1">
+          <h3 className="text-lg md:text-xl font-semibold text-white">{exercise.name}</h3>
+          {lastDate && (
+            <p className="text-xs md:text-sm text-text-secondary mt-1">Último: {lastDate}</p>
+          )}
+        </div>
+
+        {!isEditing && (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn-secondary ml-2 md:ml-3 text-xs md:text-sm"
+          >
+            ✎
+          </button>
+        )}
+      </div>
+
+      {/* Sets */}
+      <div className="mb-4 md:mb-6 space-y-2 md:space-y-3">
+        {exercise.sets.map((set, index) => (
+          <SetRow
+            key={index}
+            set={set}
+            onUpdate={(updatedSet) => handleUpdateSet(index, updatedSet)}
+            onDelete={() => handleDeleteSet(index)}
+            isEditing={isEditing}
+          />
+        ))}
+      </div>
+
+      {/* Edit Mode Actions */}
+      {isEditing && (
+        <div className="space-y-3 md:space-y-4 border-t border-tertiary pt-4 md:pt-6">
+          <button
+            onClick={handleAddSet}
+            className="w-full py-3 md:py-4 font-semibold text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
+            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
+          >
+            + Série
+          </button>
+
+          <div className="flex gap-2 md:gap-3">
+            <button
+              onClick={() => setIsEditing(false)}
+              className="flex-1 btn-secondary text-xs md:text-sm md:py-3"
+            >
+              Pronto
+            </button>
+            <button
+              onClick={onDelete}
+              className="flex-1 btn-danger text-xs md:text-sm md:py-3"
+            >
+              Deletar
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
