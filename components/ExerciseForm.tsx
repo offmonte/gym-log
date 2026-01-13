@@ -69,30 +69,30 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card mb-6 md:mb-8">
-      <h3 className="text-xl md:text-2xl font-semibold text-white mb-6">
+    <form onSubmit={handleSubmit} className="card mb-8 sm:mb-10 md:mb-12">
+      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-6 sm:mb-7 md:mb-8">
         Adicionar Exercício
       </h3>
 
       {/* Exercise name input */}
-      <div className="mb-6">
+      <div className="mb-6 sm:mb-7 md:mb-8">
         <input
           type="text"
           value={exerciseName}
           onChange={(e) => setExerciseName(e.target.value)}
           placeholder="Nome do exercício"
-          className="w-full text-lg"
+          className="w-full text-base"
         />
       </div>
 
       {/* Series section */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-text-secondary mb-4">
+      <div className="mb-6 sm:mb-7 md:mb-8">
+        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-4 sm:mb-5">
           Séries
         </label>
 
         {/* Column headers for desktop/tablet */}
-        <div className="hidden md:grid grid-cols-12 gap-3 mb-4">
+        <div className="hidden md:grid grid-cols-12 gap-3 mb-4 sm:mb-5 md:mb-5">
           <div className="col-span-2 text-xs font-medium text-text-tertiary">
             Série
           </div>
@@ -105,11 +105,11 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         </div>
 
         {/* Series list */}
-        <div className="space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {sets.map((set, index) => (
             <div
               key={index}
-              className="grid grid-cols-12 gap-2 md:gap-3 p-4 bg-tertiary/30 rounded-lg items-end"
+              className="grid grid-cols-12 gap-2 sm:gap-3 md:gap-3 p-3 sm:p-4 md:p-4 bg-tertiary/30 rounded-lg items-end"
             >
               {/* Serie number - fixed */}
               <div className="col-span-2 md:col-span-2">
@@ -118,7 +118,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                   type="text"
                   value={set.setNumber}
                   disabled
-                  className="w-full text-center bg-secondary text-white font-semibold text-lg"
+                  className="w-full text-center bg-secondary text-white font-semibold text-base"
                 />
               </div>
 
@@ -132,10 +132,10 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                     value={set.weight || ''}
                     onChange={(e) => handleUpdateSet(index, 'weight', e.target.value)}
                     placeholder="0"
-                    className="flex-1 text-center text-lg font-semibold"
+                    className="flex-1 text-center text-base font-semibold"
                     inputMode="decimal"
                   />
-                  <span className="text-text-secondary font-medium text-sm md:text-base">kg</span>
+                  <span className="text-text-secondary font-medium text-xs sm:text-sm md:text-sm">kg</span>
                 </div>
               </div>
 
@@ -147,7 +147,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                   value={set.reps || ''}
                   onChange={(e) => handleUpdateSet(index, 'reps', e.target.value)}
                   placeholder="0"
-                  className="w-full text-center text-lg font-semibold"
+                  className="w-full text-center text-base font-semibold"
                   inputMode="numeric"
                 />
               </div>
@@ -157,7 +157,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index)}
-                  className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
+                  className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 sm:h-11 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
                   style={{
                     backgroundColor: 'rgba(239, 68, 68, 0.2)',
                     color: 'var(--color-down)',
@@ -172,7 +172,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
         {/* Error message */}
         {error && (
-          <p className="text-xs text-red-400 mt-3">
+          <p className="text-xs text-red-400 mt-3 sm:mt-4">
             ⚠ {error}
           </p>
         )}
@@ -181,14 +181,14 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         <button
           type="button"
           onClick={handleAddSet}
-          className="w-full mt-4 py-3 md:py-4 text-primary font-semibold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm md:text-base"
+          className="w-full mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 text-primary font-semibold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm sm:text-base md:text-base"
         >
           + Série
         </button>
       </div>
 
       {/* Submit button */}
-      <button type="submit" className="btn-primary w-full text-base md:text-lg">
+      <button type="submit" className="btn-primary w-full text-base sm:text-base md:text-lg">
         Adicionar Exercício
       </button>
     </form>
