@@ -154,6 +154,9 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Spacer */}
+            <div className="h-2 sm:h-3 md:h-4" />
+
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
 
