@@ -59,70 +59,83 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       sets,
     });
 
-    // Reset form
     setExerciseName('');
     setSets([{ setNumber: 1, weight: 0, reps: 0 }]);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">Adicionar Exercício</h3>
+    <form onSubmit={handleSubmit} className="card mb-6 animate-slide-in">
+      <h3 className="text-lg font-semibold text-white mb-6">Adicionar Exercício</h3>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Nome do Exercício
-        </label>
-        <input
-          type="text"
-          value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
-          placeholder="Ex: Supino Reto"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+      {/* Exercise name input - BIG */}
+      <input
+        type="text"
+        value={exerciseName}
+        onChange={(e) => setExerciseName(e.target.value)}
+        placeholder="Nome do exercício"
+        className="w-full mb-6 text-lg"
+      />
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      {/* Series */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-text-secondary mb-4">
           Séries
         </label>
         <div className="space-y-3">
           {sets.map((set, index) => (
-            <div key={index} className="flex gap-2 items-end">
-              <div className="flex-shrink-0">
-                <label className="text-xs text-gray-600">Série</label>
+            <div
+              key={index}
+              className="flex items-end gap-2 p-4 bg-bg-tertiary/30 rounded-lg"
+            >
+              {/* Serie number - fixed width */}
+              <div className="w-12 flex-shrink-0">
+                <p className="text-xs text-text-secondary mb-2">Série</p>
                 <input
                   type="text"
                   value={set.setNumber}
                   disabled
-                  className="w-12 px-2 py-2 border border-gray-300 rounded bg-gray-100 text-center text-sm"
+                  className="w-full text-center bg-bg-secondary text-white font-semibold text-lg"
                 />
               </div>
+
+              {/* Weight input - BIGGER */}
               <div className="flex-1">
-                <label className="text-xs text-gray-600">Carga (kg)</label>
+                <p className="text-xs text-text-secondary mb-2">Carga</p>
                 <input
                   type="number"
                   step="0.5"
                   value={set.weight || ''}
                   onChange={(e) => handleUpdateSet(index, 'weight', e.target.value)}
                   placeholder="0"
-                  className="w-full px-2 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full text-center text-lg font-semibold"
+                  inputMode="decimal"
                 />
               </div>
+
+              <span className="text-text-secondary font-medium mb-3">kg</span>
+
+              {/* Separator */}
+              <span className="text-text-secondary text-lg mb-3">×</span>
+
+              {/* Reps input - BIGGER */}
               <div className="flex-1">
-                <label className="text-xs text-gray-600">Reps</label>
+                <p className="text-xs text-text-secondary mb-2">Reps</p>
                 <input
                   type="number"
                   value={set.reps || ''}
                   onChange={(e) => handleUpdateSet(index, 'reps', e.target.value)}
                   placeholder="0"
-                  className="w-full px-2 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full text-center text-lg font-semibold"
+                  inputMode="numeric"
                 />
               </div>
+
+              {/* Delete button - thumb-friendly */}
               {sets.length > 1 && (
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index)}
-                  className="px-3 py-2 text-red-600 hover:bg-red-50 rounded"
+                  className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-red-500/20 text-down font-bold hover:bg-red-500/30 transition-all mb-3"
                 >
                   ✕
                 </button>
@@ -131,19 +144,18 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
           ))}
         </div>
 
+        {/* Add series button */}
         <button
           type="button"
           onClick={handleAddSet}
-          className="mt-3 w-full py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
+          className="w-full mt-4 py-3 text-text-primary font-semibold rounded-lg bg-bg-tertiary hover:bg-bg-tertiary/80 transition-all text-sm"
         >
           + Adicionar Série
         </button>
       </div>
 
-      <button
-        type="submit"
-        className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700"
-      >
+      {/* Submit button - PRIMARY CTA */}
+      <button type="submit" className="btn-primary mb-4">
         Adicionar Exercício
       </button>
     </form>
