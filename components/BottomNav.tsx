@@ -17,21 +17,21 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-secondary border-t border-tertiary">
-      <div className="flex justify-around items-center h-20">
+    <nav className="fixed bottom-0 left-0 right-0 bg-secondary border-t border-tertiary md:relative">
+      <div className="flex justify-around items-center h-20 md:h-16">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className="flex flex-col items-center justify-center flex-1 h-full transition-all text-xs font-medium"
+            className="flex flex-col items-center justify-center flex-1 h-full transition-all text-xs md:text-sm font-medium"
             style={{
               color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
               backgroundColor:
                 activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
             }}
           >
-            <span className="text-2xl mb-1">{tab.icon}</span>
-            <span>{tab.label}</span>
+            <span className="text-2xl md:text-3xl mb-1">{tab.icon}</span>
+            <span className="text-xs md:text-xs">{tab.label}</span>
           </button>
         ))}
       </div>
