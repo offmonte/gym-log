@@ -94,7 +94,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                   type="text"
                   value={set.setNumber}
                   disabled
-                  className="w-full text-center bg-bg-secondary text-white font-semibold text-lg"
+                  className="w-full text-center bg-secondary text-white font-semibold text-lg"
                 />
               </div>
 
