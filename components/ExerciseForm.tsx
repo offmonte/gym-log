@@ -149,7 +149,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         <button
           type="button"
           onClick={handleAddSet}
-          className="w-full mt-4 py-3 text-text-primary font-semibold rounded-lg bg-bg-tertiary hover:bg-bg-tertiary/80 transition-all text-sm"
+          className="w-full mt-4 py-3 text-primary font-semibold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm"
         >
           + Adicionar Série
         </button>
