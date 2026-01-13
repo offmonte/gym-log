@@ -165,8 +165,14 @@ button {
   background-color: var(--bg-secondary);
   border: 1px solid var(--bg-tertiary);
   border-radius: var(--border-radius-lg);
-  padding: 16px;
+  padding: 18px;
   transition: all 200ms ease;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 20px;
+  }
 }
 
 .card:active {
