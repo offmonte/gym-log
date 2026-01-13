@@ -160,6 +160,9 @@ export default function Home() {
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
 
+            {/* Spacer */}
+            <div className="h-2 sm:h-3 md:h-4" />
+
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
               <div className="mb-8 sm:mb-10 md:mb-12">
