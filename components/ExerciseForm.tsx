@@ -125,17 +125,17 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
               {/* Weight input */}
               <div className="col-span-5 md:col-span-5">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Carga</p>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <div className="relative flex items-center">
                   <input
                     type="number"
                     step="0.5"
                     value={set.weight || ''}
                     onChange={(e) => handleUpdateSet(index, 'weight', e.target.value)}
                     placeholder="0"
-                    className="w-full sm:flex-1 text-center text-base font-semibold"
+                    className="w-full text-center text-base font-semibold pr-8"
                     inputMode="decimal"
                   />
-                  <span className="text-text-secondary font-medium text-xs sm:text-sm md:text-sm text-center">kg</span>
+                  <span className="absolute right-3 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
                 </div>
               </div>
 
