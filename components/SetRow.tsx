@@ -12,15 +12,15 @@ interface SetRowProps {
 const getComparisonDisplay = (comparison?: ComparisonResult) => {
   switch (comparison) {
     case 'up':
-      return { icon: '↑', color: 'text-green-600', label: 'Subiu' };
+      return { icon: '↑', className: 'text-up' };
     case 'down':
-      return { icon: '↓', color: 'text-red-600', label: 'Desceu' };
+      return { icon: '↓', className: 'text-down' };
     case 'equal':
-      return { icon: '=', color: 'text-gray-400', label: 'Igual' };
+      return { icon: '=', className: 'text-equal' };
     case 'new':
-      return { icon: 'NEW', color: 'text-blue-600', label: 'Novo' };
+      return { icon: 'NEW', className: 'text-new' };
     default:
-      return { icon: '-', color: 'text-gray-400', label: '' };
+      return { icon: '-', className: 'text-text-tertiary' };
   }
 };
 
@@ -33,17 +33,19 @@ export default function SetRow({
   const comparison = getComparisonDisplay(set.comparison);
 
   return (
-    <div className="flex items-center gap-3 py-3 px-4 bg-gray-50 rounded-lg">
-      <div className="flex-shrink-0 w-8 text-center font-semibold text-gray-600">
-        {set.setNumber}ª
-      </div>
-
+    <div className="flex items-center gap-3 mb-3 animate-slide-in">
       {isEditing ? (
         <>
+          {/* Serie number display during edit */}
+          <div className="w-10 flex-shrink-0 text-center font-semibold text-text-secondary text-sm">
+            {set.setNumber}ª
+          </div>
+
+          {/* Weight input */}
           <input
             type="number"
             step="0.5"
-            value={set.weight}
+            value={set.weight || ''}
             onChange={(e) =>
               onUpdate({
                 ...set,
@@ -51,15 +53,17 @@ export default function SetRow({
               })
             }
             placeholder="kg"
-            className="w-20 px-2 py-2 border border-gray-300 rounded text-sm"
+            className="w-16 text-center text-lg font-semibold"
+            inputMode="decimal"
           />
-          <span className="text-gray-500 text-sm">kg</span>
+          
+          <span className="text-text-secondary font-medium">kg</span>
+          <span className="text-text-secondary">×</span>
 
-          <span className="text-gray-500">×</span>
-
+          {/* Reps input */}
           <input
             type="number"
-            value={set.reps}
+            value={set.reps || ''}
             onChange={(e) =>
               onUpdate({
                 ...set,
@@ -67,31 +71,42 @@ export default function SetRow({
               })
             }
             placeholder="reps"
-            className="w-16 px-2 py-2 border border-gray-300 rounded text-sm"
+            className="w-16 text-center text-lg font-semibold"
+            inputMode="numeric"
           />
-          <span className="text-gray-500 text-sm">reps</span>
+          
+          <span className="text-text-secondary font-medium">reps</span>
 
+          {/* Delete button */}
           <button
             onClick={onDelete}
-            className="ml-auto px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
+            className="ml-auto flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-red-500/20 text-down font-bold hover:bg-red-500/30"
           >
             ✕
           </button>
         </>
       ) : (
         <>
-          <div className="flex-1 flex items-center gap-2">
-            <span className="font-semibold">{set.weight}</span>
-            <span className="text-gray-500">kg ×</span>
-            <span className="font-semibold">{set.reps}</span>
-            <span className="text-gray-500">reps</span>
+          {/* Series number */}
+          <div className="w-10 flex-shrink-0 text-center font-semibold text-text-secondary text-sm">
+            {set.setNumber}ª
           </div>
 
-          <div className={`font-bold text-lg flex items-center gap-1 ${comparison.color}`}>
+          {/* Series info */}
+          <div className="flex-1 flex items-baseline gap-1">
+            <span className="text-lg font-semibold text-white">{set.weight}</span>
+            <span className="text-sm text-text-secondary">kg</span>
+            <span className="text-text-secondary mx-1">×</span>
+            <span className="text-lg font-semibold text-white">{set.reps}</span>
+            <span className="text-sm text-text-secondary">reps</span>
+          </div>
+
+          {/* Indicator */}
+          <div className={`flex-shrink-0 text-2xl font-bold ${comparison.className}`}>
             {comparison.icon === 'NEW' ? (
               <span className="text-xs font-bold">{comparison.icon}</span>
             ) : (
-              <span>{comparison.icon}</span>
+              comparison.icon
             )}
           </div>
         </>
