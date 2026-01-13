@@ -91,8 +91,8 @@ export default function ExerciseCard({
         <div className="space-y-3 sm:space-y-4 md:space-y-4 border-t border-tertiary pt-4 sm:pt-5 md:pt-6">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 sm:py-3 md:py-4 font-semibold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
-            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
+            className="w-full py-3 sm:py-3 md:py-4 font-bold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
+            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)', fontWeight: '700' }}
           >
             + Série
           </button>
