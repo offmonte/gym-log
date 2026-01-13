@@ -178,6 +178,12 @@ body {
   padding-bottom: 80px;
 }
 
+@media (min-width: 640px) {
+  body {
+    padding-bottom: 80px;
+  }
+}
+
 /* Responsive adjustments */
 @media (min-width: 768px) {
   body {
