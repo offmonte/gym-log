@@ -24,6 +24,11 @@
   --color-foreground: var(--text-primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--color-new);
+  --color-success: var(--color-up);
+  --color-danger: var(--color-down);
+  --color-warning: var(--color-equal);
 }
 
 * {
