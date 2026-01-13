@@ -8,12 +8,14 @@ interface ExerciseCardProps {
   exercise: Exercise;
   onUpdate: (exercise: Exercise) => void;
   onDelete: () => void;
+  lastDate?: string;
 }
 
 export default function ExerciseCard({
   exercise,
   onUpdate,
   onDelete,
+  lastDate,
 }: ExerciseCardProps) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -51,26 +53,28 @@ export default function ExerciseCard({
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-gray-800">{exercise.name}</h3>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setIsEditing(!isEditing)}
-            className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
-          >
-            {isEditing ? 'Pronto' : 'Editar'}
-          </button>
-          <button
-            onClick={onDelete}
-            className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
-          >
-            Deletar
-          </button>
+    <div className="card mb-4 animate-slide-in">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-white">{exercise.name}</h3>
+          {lastDate && (
+            <p className="text-sm text-text-secondary mt-1">Último: {lastDate}</p>
+          )}
         </div>
+        
+        {!isEditing && (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn-secondary ml-2 text-sm"
+          >
+            ✎
+          </button>
+        )}
       </div>
 
-      <div className="space-y-3">
+      {/* Sets */}
+      <div className="mb-4">
         {exercise.sets.map((set, index) => (
           <SetRow
             key={index}
@@ -82,13 +86,31 @@ export default function ExerciseCard({
         ))}
       </div>
 
+      {/* Edit Mode Actions */}
       {isEditing && (
-        <button
-          onClick={handleAddSet}
-          className="mt-4 w-full py-2 bg-green-100 text-green-700 rounded font-semibold hover:bg-green-200"
-        >
-          + Adicionar Série
-        </button>
+        <div className="space-y-3 border-t border-bg-tertiary pt-4">
+          <button
+            onClick={handleAddSet}
+            className="w-full py-3 bg-green-500/20 text-green-400 rounded-lg font-semibold text-sm hover:bg-green-500/30 transition-all"
+          >
+            + Série
+          </button>
+          
+          <div className="flex gap-2">
+            <button
+              onClick={() => setIsEditing(false)}
+              className="flex-1 btn-secondary text-green-400"
+            >
+              Pronto
+            </button>
+            <button
+              onClick={onDelete}
+              className="flex-1 btn-danger text-sm"
+            >
+              Deletar
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
