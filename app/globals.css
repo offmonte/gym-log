@@ -179,6 +179,18 @@ body {
 }
 
 /* Utilities */
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
 .text-up {
   color: var(--color-up);
   font-weight: 600;
@@ -199,9 +211,21 @@ body {
   font-weight: 600;
 }
 
+.text-primary {
+  color: var(--text-primary);
+}
+
 .text-secondary {
   color: var(--text-secondary);
   font-size: 14px;
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.border-tertiary {
+  border-color: var(--bg-tertiary);
 }
 
 /* Animations */
