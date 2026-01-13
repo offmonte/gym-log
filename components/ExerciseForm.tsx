@@ -181,7 +181,8 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         <button
           type="button"
           onClick={handleAddSet}
-          className="w-full mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 text-primary font-semibold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm sm:text-base md:text-base"
+          className="w-full mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm sm:text-base md:text-base"
+          style={{ fontWeight: '700' }}
         >
           + Série
         </button>
