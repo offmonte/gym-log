@@ -164,7 +164,7 @@ export default function Home() {
                   Exercícios de Hoje
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
                   {currentWorkout.exercises.map((exercise, index) => (
                     <div key={index} className="card">
                       <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-5 sm:mb-6 md:mb-7">
