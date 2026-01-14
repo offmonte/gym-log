@@ -69,7 +69,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card mb-8 sm:mb-10 md:mb-12">
+    <form onSubmit={handleSubmit} className="card">
       <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
         Adicionar Exercício
       </h3>
