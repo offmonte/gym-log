@@ -116,7 +116,7 @@ export default function Home() {
       {/* WORKOUT TAB */}
       {activeTab === 'workout' && (
         <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-4xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
             <div className="mb-6 sm:mb-8 md:mb-10">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">💪 Gym Log</h1>
@@ -126,7 +126,7 @@ export default function Home() {
             </div>
 
             {/* Workout info card */}
-            <div className="card mb-6 sm:mb-8 md:mb-10">
+            <div className="card">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
@@ -154,18 +154,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Spacer */}
-            <div className="h-2 sm:h-3 md:h-4" />
-
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
 
-            {/* Spacer */}
-            <div className="h-2 sm:h-3 md:h-4" />
-
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
-              <div className="mb-8 sm:mb-10 md:mb-12">
+              <div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-6 md:mb-8">
                   Exercícios de Hoje
                 </h2>
@@ -244,7 +238,7 @@ export default function Home() {
 
             {/* Empty state */}
             {currentWorkout.exercises.length === 0 && (
-              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
+              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20 !gap-0">
                 <p className="text-text-secondary text-base sm:text-lg md:text-lg">
                   Nenhum exercício adicionado
                 </p>

@@ -32,9 +32,17 @@
 }
 
 * {
+  box-sizing: border-box;
+}
+
+html, body, div, span, p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
@@ -167,11 +175,22 @@ button {
   border-radius: var(--border-radius-lg);
   padding: 18px;
   transition: all 200ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @media (min-width: 640px) {
   .card {
-    padding: 20px;
+    padding: 22px;
+    gap: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 24px;
+    gap: 1.25rem;
   }
 }
 
@@ -215,10 +234,6 @@ body {
     min-height: 40px;
   }
 
-  .card {
-    padding: 20px;
-  }
-
   h1 {
     font-size: 28px;
   }
@@ -229,12 +244,6 @@ body {
 
   h3 {
     font-size: 18px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .card {
-    padding: 24px;
   }
 }
 
