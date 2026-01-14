@@ -98,15 +98,15 @@ export const addComparisons = (exercise: Exercise, lastExercise: Exercise | null
 
 // Format date to DD/MM format
 export const formatDateForDisplay = (dateString: string): string => {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const [year, month, day] = dateString.split('-');
   return `${day}/${month}`;
 };
 
 // Get day of week in Portuguese
 export const getDayOfWeek = (dateString: string): string => {
-  const date = new Date(dateString);
+  // Parse manually to avoid timezone issues
+  const [year, month, day] = dateString.split('-');
+  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   return days[date.getDay()];
 };
@@ -114,7 +114,10 @@ export const getDayOfWeek = (dateString: string): string => {
 // Get today's date in YYYY-MM-DD format
 export const getTodayDate = (): string => {
   const today = new Date();
-  return today.toISOString().split('T')[0];
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 };
 
 // Generate unique ID
