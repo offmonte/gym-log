@@ -177,20 +177,20 @@ button {
   transition: all 200ms ease;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 @media (min-width: 640px) {
   .card {
-    padding: 24px;
-    gap: 1.75rem;
+    padding: 22px;
+    gap: 1.125rem;
   }
 }
 
 @media (min-width: 1024px) {
   .card {
-    padding: 28px;
-    gap: 2rem;
+    padding: 24px;
+    gap: 1.25rem;
   }
 }
 
