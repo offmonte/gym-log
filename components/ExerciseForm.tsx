@@ -70,12 +70,12 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="card mb-8 sm:mb-10 md:mb-12">
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-6 sm:mb-7 md:mb-8">
+      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-10 sm:mb-12 md:mb-14">
         Adicionar Exercício
       </h3>
 
       {/* Exercise name input */}
-      <div className="mb-6 sm:mb-7 md:mb-8">
+      <div className="mb-10 sm:mb-12 md:mb-14">
         <input
           type="text"
           value={exerciseName}
@@ -86,8 +86,8 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       </div>
 
       {/* Series section */}
-      <div className="mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-7 md:mb-8">
-        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-4 sm:mb-5">
+      <div className="mt-10 sm:mt-12 md:mt-14 mb-10 sm:mb-12 md:mb-14">
+        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-6 sm:mb-7 md:mb-8">
           Séries
         </label>
 
@@ -180,19 +180,19 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       </div>
 
       {/* Buttons container - side by side */}
-      <div className="flex gap-3 sm:gap-4 md:gap-4">
+      <div className="flex gap-3 sm:gap-4 md:gap-4 mt-10 sm:mt-12 md:mt-14">
         {/* Add series button */}
         <button
           type="button"
           onClick={handleAddSet}
-          className="flex-1 mt-4 sm:mt-5 md:mt-5 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base"
+          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base"
           style={{ fontWeight: '700' }}
         >
           + Série
         </button>
 
         {/* Submit button */}
-        <button type="submit" className="flex-1 mt-4 sm:mt-5 md:mt-5 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg"
+        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg"
           style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
           Adicionar Exercício
         </button>
