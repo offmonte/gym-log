@@ -182,7 +182,15 @@ button {
 
 @media (min-width: 640px) {
   .card {
-    padding: 20px;
+    padding: 24px;
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 28px;
+    gap: 2rem;
   }
 }
 
