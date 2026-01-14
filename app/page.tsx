@@ -238,7 +238,7 @@ export default function Home() {
 
             {/* Empty state */}
             {currentWorkout.exercises.length === 0 && (
-              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
+              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20 !gap-0">
                 <p className="text-text-secondary text-base sm:text-lg md:text-lg">
                   Nenhum exercício adicionado
                 </p>
