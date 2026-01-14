@@ -159,7 +159,7 @@ export default function Home() {
 
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
-              <div className="mb-8 sm:mb-10 md:mb-12">
+              <div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-6 md:mb-8">
                   Exercícios de Hoje
                 </h2>
