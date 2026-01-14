@@ -247,12 +247,6 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
-  .card {
-    padding: 24px;
-  }
-}
-
 @media (max-height: 700px) and (orientation: landscape) {
   body {
     padding-bottom: 100px;
