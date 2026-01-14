@@ -177,21 +177,26 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
           </p>
         )}
 
+      </div>
+
+      {/* Buttons container - side by side */}
+      <div className="flex gap-3 sm:gap-4 md:gap-4">
         {/* Add series button */}
         <button
           type="button"
           onClick={handleAddSet}
-          className="w-full mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm sm:text-base md:text-base"
+          className="flex-1 mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-sm sm:text-base md:text-base"
           style={{ fontWeight: '700' }}
         >
           + Série
         </button>
-      </div>
 
-      {/* Submit button */}
-      <button type="submit" className="btn-primary w-full text-base sm:text-base md:text-lg">
-        Adicionar Exercício
-      </button>
+        {/* Submit button */}
+        <button type="submit" className="flex-1 mt-4 sm:mt-5 md:mt-5 py-3 sm:py-3 md:py-4 btn-primary text-base sm:text-base md:text-lg rounded-lg font-bold transition-all"
+          style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
+          Adicionar Exercício
+        </button>
+      </div>
     </form>
   );
 }
