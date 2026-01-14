@@ -70,12 +70,12 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="card mb-8 sm:mb-10 md:mb-12">
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-10 sm:mb-12 md:mb-14">
+      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
         Adicionar Exercício
       </h3>
 
       {/* Exercise name input */}
-      <div className="mb-10 sm:mb-12 md:mb-14">
+      <div>
         <input
           type="text"
           value={exerciseName}
@@ -86,8 +86,8 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       </div>
 
       {/* Series section */}
-      <div className="mt-10 sm:mt-12 md:mt-14 mb-10 sm:mb-12 md:mb-14">
-        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-6 sm:mb-7 md:mb-8">
+      <div>
+        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-4 sm:mb-5">
           Séries
         </label>
 
