@@ -180,7 +180,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       </div>
 
       {/* Buttons container - side by side */}
-      <div className="flex gap-3 sm:gap-4 md:gap-4 mt-10 sm:mt-12 md:mt-14">
+      <div className="flex gap-3 sm:gap-4 md:gap-4">
         {/* Add series button */}
         <button
           type="button"
