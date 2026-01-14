@@ -126,7 +126,7 @@ export default function Home() {
             </div>
 
             {/* Workout info card */}
-            <div className="card mb-6 sm:mb-8 md:mb-10">
+            <div className="card">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
@@ -154,14 +154,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Spacer */}
-            <div className="h-2 sm:h-3 md:h-4" />
-
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
-
-            {/* Spacer */}
-            <div className="h-2 sm:h-3 md:h-4" />
 
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
