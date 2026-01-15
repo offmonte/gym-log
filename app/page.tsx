@@ -305,12 +305,7 @@ export default function Home() {
               </p>
 
               <button
-                onClick={() => {
-                  if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
-                    localStorage.removeItem('gymlog_workouts');
-                    setWorkouts([]);
-                  }
-                }}
+                onClick={() => setShowClearDataModal(true)}
                 className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
               >
                 Limpar Dados
