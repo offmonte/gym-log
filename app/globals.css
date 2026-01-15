@@ -163,11 +163,6 @@ button {
   color: white;
 }
 
-.btn-success {
-  background-color: var(--color-up);
-  color: white;
-}
-
 /* Cards */
 .card {
   background-color: var(--bg-secondary);
@@ -286,10 +281,6 @@ body {
   font-weight: 600;
 }
 
-.text-primary {
-  color: var(--text-primary);
-}
-
 .text-secondary {
   color: var(--text-secondary);
   font-size: 14px;
@@ -328,10 +319,6 @@ body {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 300ms ease-out;
-}
-
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
@@ -339,10 +326,6 @@ body {
   50% {
     opacity: 0.7;
   }
-}
-
-.animate-pulse-subtle {
-  animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes scaleUp {
@@ -354,10 +337,6 @@ body {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-.animate-scale-up {
-  animation: scaleUp 200ms ease-out;
 }
 
 /* Button feedback - active state animation */
