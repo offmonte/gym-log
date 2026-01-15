@@ -9,22 +9,18 @@ export const getWorkouts = (): Workout[] => {
   return data ? JSON.parse(data) : [];
 };
 
-export const saveWorkouts = (workouts: Workout[]): void => {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts));
-};
-
 export const saveWorkout = (workout: Workout): void => {
   const workouts = getWorkouts();
   const existingIndex = workouts.findIndex(w => w.id === workout.id);
-  
+
   if (existingIndex >= 0) {
     workouts[existingIndex] = workout;
   } else {
     workouts.push(workout);
   }
-  
-  saveWorkouts(workouts);
+
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts));
 };
 
 // Find last exercise by name
