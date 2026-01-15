@@ -24,6 +24,7 @@ export default function Home() {
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<NavTab>('workout');
+  const [showClearDataModal, setShowClearDataModal] = useState(false);
 
   useEffect(() => {
     const loadedWorkouts = getWorkouts();
