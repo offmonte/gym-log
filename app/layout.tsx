@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GymLog - Monitor seu Treino",
   description: "Aplicativo web de monitoramento de treino baseado em datas. Registre exercícios, séries e compare seu progresso com execuções anteriores.",
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
 };
 
 export default function RootLayout({
