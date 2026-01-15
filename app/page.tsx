@@ -15,6 +15,7 @@ import {
 import WorkoutCard from '@/components/WorkoutCard';
 import ExerciseForm from '@/components/ExerciseForm';
 import BottomNav, { NavTab } from '@/components/BottomNav';
+import ClearDataModal from '@/components/ClearDataModal';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -23,6 +24,7 @@ export default function Home() {
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<NavTab>('workout');
+  const [showClearDataModal, setShowClearDataModal] = useState(false);
 
   useEffect(() => {
     const loadedWorkouts = getWorkouts();
@@ -303,12 +305,7 @@ export default function Home() {
               </p>
 
               <button
-                onClick={() => {
-                  if (window.confirm('Tem certeza? Isso deletará todos os treinos.')) {
-                    localStorage.removeItem('gymlog_workouts');
-                    setWorkouts([]);
-                  }
-                }}
+                onClick={() => setShowClearDataModal(true)}
                 className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
               >
                 Limpar Dados
@@ -320,6 +317,17 @@ export default function Home() {
 
       {/* Bottom Navigation */}
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {/* Clear Data Modal */}
+      <ClearDataModal
+        isOpen={showClearDataModal}
+        onConfirm={() => {
+          localStorage.removeItem('gymlog_workouts');
+          setWorkouts([]);
+          setShowClearDataModal(false);
+        }}
+        onCancel={() => setShowClearDataModal(false)}
+      />
     </div>
   );
 }

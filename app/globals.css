@@ -195,19 +195,19 @@ button {
 
 /* Layout with bottom nav */
 body {
-  padding-bottom: 80px;
+  padding-bottom: calc(80px + safe-area-inset-bottom);
 }
 
 @media (min-width: 640px) {
   body {
-    padding-bottom: 80px;
+    padding-bottom: calc(80px + safe-area-inset-bottom);
   }
 }
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
   body {
-    padding-bottom: 0;
+    padding-bottom: 80px;
     font-size: 15px;
   }
 
