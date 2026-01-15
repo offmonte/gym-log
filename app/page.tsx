@@ -317,6 +317,17 @@ export default function Home() {
 
       {/* Bottom Navigation */}
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {/* Clear Data Modal */}
+      <ClearDataModal
+        isOpen={showClearDataModal}
+        onConfirm={() => {
+          localStorage.removeItem('gymlog_workouts');
+          setWorkouts([]);
+          setShowClearDataModal(false);
+        }}
+        onCancel={() => setShowClearDataModal(false)}
+      />
     </div>
   );
 }
