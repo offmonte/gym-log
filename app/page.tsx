@@ -122,7 +122,10 @@ export default function Home() {
           <div className="w-full max-w-4xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
             <div className="mb-6 sm:mb-8 md:mb-10">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">💪 Gym Log</h1>
+              <div className="flex items-center gap-3 mb-2">
+                <Dumbbell size={40} className="text-white" />
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Gym Log</h1>
+              </div>
               <p className="text-text-secondary mt-2 text-sm sm:text-base md:text-base">
                 {currentDayOfWeek} • {currentFormattedDate}
               </p>
