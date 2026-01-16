@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { AlertCircle, X, Trash2 } from 'lucide-react';
 
 interface ClearDataModalProps {
   isOpen: boolean;
@@ -36,9 +37,12 @@ export default function ClearDataModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-secondary rounded-lg max-w-md w-full p-6 sm:p-8 animate-slide-in">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-          ⚠️ Tem certeza?
-        </h2>
+        <div className="flex items-center gap-3 mb-4">
+          <AlertCircle size={28} className="text-red-500 flex-shrink-0" />
+          <h2 className="text-xl sm:text-2xl font-bold text-white">
+            Tem certeza?
+          </h2>
+        </div>
 
         <p className="text-text-secondary text-sm sm:text-base mb-6 leading-relaxed">
           Tem certeza que deseja apagar <span className="font-semibold">TODAS</span> suas anotações de treino? Esse processo não poderá ser revertido depois.
@@ -53,15 +57,16 @@ export default function ClearDataModal({
         <div className="flex gap-3 sm:gap-4">
           <button
             onClick={onCancel}
-            className="flex-1 py-3 btn-secondary text-sm font-medium"
+            className="flex-1 py-3 btn-secondary text-sm font-medium flex items-center justify-center gap-1"
           >
+            <X size={16} />
             Cancelar
           </button>
 
           <button
             onClick={onConfirm}
             disabled={!isButtonEnabled}
-            className="flex-1 py-3 text-sm font-medium rounded-lg transition-all"
+            className="flex-1 py-3 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-1"
             style={{
               backgroundColor: isButtonEnabled ? 'var(--color-down)' : 'var(--bg-tertiary)',
               color: isButtonEnabled ? 'white' : 'var(--text-secondary)',
@@ -69,6 +74,7 @@ export default function ClearDataModal({
               opacity: isButtonEnabled ? 1 : 0.6,
             }}
           >
+            <Trash2 size={16} />
             {isButtonEnabled ? 'Apagar Tudo' : 'Aguarde...'}
           </button>
         </div>

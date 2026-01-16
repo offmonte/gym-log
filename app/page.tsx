@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Dumbbell, Calendar, Settings, Trash2 } from 'lucide-react';
 import { Workout, Exercise } from '@/lib/types';
 import {
   getWorkouts,
@@ -121,7 +122,10 @@ export default function Home() {
           <div className="w-full max-w-4xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
             <div className="mb-6 sm:mb-8 md:mb-10">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">💪 Gym Log</h1>
+              <div className="flex items-center gap-3 mb-2">
+                <Dumbbell size={40} className="text-white" />
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Gym Log</h1>
+              </div>
               <p className="text-text-secondary mt-2 text-sm sm:text-base md:text-base">
                 {currentDayOfWeek} • {currentFormattedDate}
               </p>
@@ -257,9 +261,10 @@ export default function Home() {
       {activeTab === 'history' && (
         <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
           <div className="w-full max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
-              📅 Histórico
-            </h1>
+            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
+              <Calendar size={40} className="text-white" />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Histórico</h1>
+            </div>
 
             {sortedWorkouts.length === 0 ? (
               <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
@@ -289,9 +294,10 @@ export default function Home() {
       {activeTab === 'settings' && (
         <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
           <div className="w-full max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10">
-              ⚙️ Ajustes
-            </h1>
+            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
+              <Settings size={40} className="text-white" />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Ajustes</h1>
+            </div>
 
             <div className="card">
               <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Sobre</h3>
@@ -306,8 +312,9 @@ export default function Home() {
 
               <button
                 onClick={() => setShowClearDataModal(true)}
-                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
+                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6 flex items-center justify-center gap-2"
               >
+                <Trash2 size={18} />
                 Limpar Dados
               </button>
             </div>

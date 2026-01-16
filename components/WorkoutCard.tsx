@@ -1,5 +1,6 @@
 'use client';
 
+import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react';
 import { Workout, Exercise } from '@/lib/types';
 import { getDayOfWeek, formatDateForDisplay } from '@/lib/workoutUtils';
 import ExerciseCard from './ExerciseCard';
@@ -59,8 +60,8 @@ export default function WorkoutCard({
               {workout.exercises.length} exercício(s)
             </p>
           </div>
-          <div className="text-2xl text-text-secondary transition-transform flex-shrink-0 ml-3">
-            {isExpanded ? '▼' : '▶'}
+          <div className="text-text-secondary transition-transform flex-shrink-0 ml-3">
+            {isExpanded ? <ChevronDown size={24} /> : <ChevronRight size={24} />}
           </div>
         </div>
       </button>
@@ -91,8 +92,9 @@ export default function WorkoutCard({
           {/* Delete workout button */}
           <button
             onClick={onDelete}
-            className="w-full mt-6 sm:mt-7 md:mt-8 py-3 btn-danger text-xs sm:text-sm md:text-base"
+            className="w-full mt-6 sm:mt-7 md:mt-8 py-3 btn-danger text-xs sm:text-sm md:text-base flex items-center justify-center gap-2"
           >
+            <Trash2 size={18} />
             Deletar Treino
           </button>
         </div>

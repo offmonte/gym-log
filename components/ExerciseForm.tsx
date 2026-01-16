@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Trash2, Plus, AlertCircle } from 'lucide-react';
 import { Exercise } from '@/lib/types';
 
 interface ExerciseFormProps {
@@ -162,8 +163,9 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                     backgroundColor: 'rgba(239, 68, 68, 0.2)',
                     color: 'var(--color-down)',
                   }}
+                  aria-label="Remover série"
                 >
-                  ✕
+                  <Trash2 size={18} />
                 </button>
               )}
             </div>
@@ -172,9 +174,10 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
         {/* Error message */}
         {error && (
-          <p className="text-xs text-red-400 mt-3 sm:mt-4">
-            ⚠ {error}
-          </p>
+          <div className="flex items-center gap-2 text-xs text-red-400 mt-3 sm:mt-4">
+            <AlertCircle size={16} className="flex-shrink-0" />
+            <p>{error}</p>
+          </div>
         )}
 
       </div>
@@ -185,15 +188,17 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         <button
           type="button"
           onClick={handleAddSet}
-          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base"
+          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base flex items-center justify-center gap-1"
           style={{ fontWeight: '700' }}
         >
-          + Série
+          <Plus size={18} />
+          Série
         </button>
 
         {/* Submit button */}
-        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg"
+        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg flex items-center justify-center gap-2"
           style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
+          <Plus size={18} />
           Adicionar Exercício
         </button>
       </div>

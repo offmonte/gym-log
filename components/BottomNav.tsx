@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Dumbbell, Calendar, Settings } from 'lucide-react';
 
 export type NavTab = 'workout' | 'history' | 'settings';
 
@@ -9,11 +10,17 @@ interface BottomNavProps {
   onTabChange: (tab: NavTab) => void;
 }
 
+interface NavTabItem {
+  id: NavTab;
+  label: string;
+  icon: React.ReactNode;
+}
+
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
-  const tabs: { id: NavTab; label: string; icon: string }[] = [
-    { id: 'workout', label: 'Treino', icon: '🏋️' },
-    { id: 'history', label: 'Histórico', icon: '📅' },
-    { id: 'settings', label: 'Ajustes', icon: '⚙️' },
+  const tabs: NavTabItem[] = [
+    { id: 'workout', label: 'Treino', icon: <Dumbbell size={24} /> },
+    { id: 'history', label: 'Histórico', icon: <Calendar size={24} /> },
+    { id: 'settings', label: 'Ajustes', icon: <Settings size={24} /> },
   ];
 
   return (
@@ -30,7 +37,11 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                 activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
             }}
           >
-            <span className="text-2xl md:text-3xl mb-1">{tab.icon}</span>
+            <div className="mb-1" style={{
+              color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
+            }}>
+              {tab.icon}
+            </div>
             <span className="text-xs md:text-xs">{tab.label}</span>
           </button>
         ))}

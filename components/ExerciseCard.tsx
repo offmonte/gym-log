@@ -3,6 +3,7 @@
 import { Exercise } from '@/lib/types';
 import SetRow from './SetRow';
 import { useState } from 'react';
+import { Edit2, Plus, Check, Trash2 } from 'lucide-react';
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -66,9 +67,10 @@ export default function ExerciseCard({
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2"
+            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2 flex items-center gap-1"
+            aria-label="Editar exercício"
           >
-            ✎
+            <Edit2 size={16} />
           </button>
         )}
       </div>
@@ -91,23 +93,26 @@ export default function ExerciseCard({
         <div className="space-y-3 sm:space-y-4 md:space-y-4 border-t border-tertiary pt-4 sm:pt-5 md:pt-6">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 sm:py-3 md:py-4 font-bold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg"
+            className="w-full py-3 sm:py-3 md:py-4 font-bold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg flex items-center justify-center gap-2"
             style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)', fontWeight: '700' }}
           >
-            + Série
+            <Plus size={18} />
+            Série
           </button>
 
           <div className="flex gap-2 sm:gap-3 md:gap-3">
             <button
               onClick={() => setIsEditing(false)}
-              className="flex-1 btn-secondary text-xs sm:text-sm md:text-base py-3"
+              className="flex-1 btn-secondary text-xs sm:text-sm md:text-base py-3 flex items-center justify-center gap-1"
             >
+              <Check size={16} />
               Pronto
             </button>
             <button
               onClick={onDelete}
-              className="flex-1 btn-danger text-xs sm:text-sm md:text-base py-3"
+              className="flex-1 btn-danger text-xs sm:text-sm md:text-base py-3 flex items-center justify-center gap-1"
             >
+              <Trash2 size={16} />
               Deletar
             </button>
           </div>
