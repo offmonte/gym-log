@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Dumbbell, Calendar, Settings } from 'lucide-react';
 
 export type NavTab = 'workout' | 'history' | 'settings';
 
@@ -9,11 +10,17 @@ interface BottomNavProps {
   onTabChange: (tab: NavTab) => void;
 }
 
+interface NavTabItem {
+  id: NavTab;
+  label: string;
+  icon: React.ReactNode;
+}
+
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
-  const tabs: { id: NavTab; label: string; icon: string }[] = [
-    { id: 'workout', label: 'Treino', icon: '🏋️' },
-    { id: 'history', label: 'Histórico', icon: '📅' },
-    { id: 'settings', label: 'Ajustes', icon: '⚙️' },
+  const tabs: NavTabItem[] = [
+    { id: 'workout', label: 'Treino', icon: <Dumbbell size={24} /> },
+    { id: 'history', label: 'Histórico', icon: <Calendar size={24} /> },
+    { id: 'settings', label: 'Ajustes', icon: <Settings size={24} /> },
   ];
 
   return (
