@@ -1,5 +1,6 @@
 'use client';
 
+import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react';
 import { Workout, Exercise } from '@/lib/types';
 import { getDayOfWeek, formatDateForDisplay } from '@/lib/workoutUtils';
 import ExerciseCard from './ExerciseCard';
