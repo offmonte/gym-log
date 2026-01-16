@@ -196,8 +196,9 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         </button>
 
         {/* Submit button */}
-        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg"
+        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg flex items-center justify-center gap-2"
           style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
+          <Plus size={18} />
           Adicionar Exercício
         </button>
       </div>
