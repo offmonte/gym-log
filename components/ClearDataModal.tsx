@@ -57,15 +57,16 @@ export default function ClearDataModal({
         <div className="flex gap-3 sm:gap-4">
           <button
             onClick={onCancel}
-            className="flex-1 py-3 btn-secondary text-sm font-medium"
+            className="flex-1 py-3 btn-secondary text-sm font-medium flex items-center justify-center gap-1"
           >
+            <X size={16} />
             Cancelar
           </button>
 
           <button
             onClick={onConfirm}
             disabled={!isButtonEnabled}
-            className="flex-1 py-3 text-sm font-medium rounded-lg transition-all"
+            className="flex-1 py-3 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-1"
             style={{
               backgroundColor: isButtonEnabled ? 'var(--color-down)' : 'var(--bg-tertiary)',
               color: isButtonEnabled ? 'white' : 'var(--text-secondary)',
@@ -73,6 +74,7 @@ export default function ClearDataModal({
               opacity: isButtonEnabled ? 1 : 0.6,
             }}
           >
+            <Trash2 size={16} />
             {isButtonEnabled ? 'Apagar Tudo' : 'Aguarde...'}
           </button>
         </div>
