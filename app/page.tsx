@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Dumbbell, Calendar, Settings } from 'lucide-react';
 import { Workout, Exercise } from '@/lib/types';
 import {
   getWorkouts,
