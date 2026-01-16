@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Plus, AlertCircle } from 'lucide-react';
 import { Exercise } from '@/lib/types';
 
 interface ExerciseFormProps {
