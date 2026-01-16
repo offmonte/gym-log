@@ -67,9 +67,10 @@ export default function ExerciseCard({
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2"
+            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2 flex items-center gap-1"
+            aria-label="Editar exercício"
           >
-            ✎
+            <Edit2 size={16} />
           </button>
         )}
       </div>
