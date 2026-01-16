@@ -60,8 +60,8 @@ export default function WorkoutCard({
               {workout.exercises.length} exercício(s)
             </p>
           </div>
-          <div className="text-2xl text-text-secondary transition-transform flex-shrink-0 ml-3">
-            {isExpanded ? '▼' : '▶'}
+          <div className="text-text-secondary transition-transform flex-shrink-0 ml-3">
+            {isExpanded ? <ChevronDown size={24} /> : <ChevronRight size={24} />}
           </div>
         </div>
       </button>
