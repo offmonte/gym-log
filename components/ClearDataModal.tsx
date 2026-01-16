@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, X, Trash2 } from 'lucide-react';
 
 interface ClearDataModalProps {
   isOpen: boolean;
