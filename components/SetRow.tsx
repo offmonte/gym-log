@@ -1,5 +1,6 @@
 'use client';
 
+import { Trash2 } from 'lucide-react';
 import { Set, ComparisonResult } from '@/lib/types';
 
 interface SetRowProps {
