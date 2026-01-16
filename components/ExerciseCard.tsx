@@ -3,6 +3,7 @@
 import { Exercise } from '@/lib/types';
 import SetRow from './SetRow';
 import { useState } from 'react';
+import { Edit2, Plus, Check, Trash2 } from 'lucide-react';
 
 interface ExerciseCardProps {
   exercise: Exercise;
