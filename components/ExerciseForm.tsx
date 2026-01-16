@@ -188,10 +188,11 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         <button
           type="button"
           onClick={handleAddSet}
-          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base"
+          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base flex items-center justify-center gap-1"
           style={{ fontWeight: '700' }}
         >
-          + Série
+          <Plus size={18} />
+          Série
         </button>
 
         {/* Submit button */}
