@@ -312,8 +312,9 @@ export default function Home() {
 
               <button
                 onClick={() => setShowClearDataModal(true)}
-                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6"
+                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6 flex items-center justify-center gap-2"
               >
+                <Trash2 size={18} />
                 Limpar Dados
               </button>
             </div>
