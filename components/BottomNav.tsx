@@ -37,7 +37,11 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                 activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
             }}
           >
-            <span className="text-2xl md:text-3xl mb-1">{tab.icon}</span>
+            <div className="mb-1" style={{
+              color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
+            }}>
+              {tab.icon}
+            </div>
             <span className="text-xs md:text-xs">{tab.label}</span>
           </button>
         ))}
