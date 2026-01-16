@@ -163,8 +163,9 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                     backgroundColor: 'rgba(239, 68, 68, 0.2)',
                     color: 'var(--color-down)',
                   }}
+                  aria-label="Remover série"
                 >
-                  ✕
+                  <Trash2 size={18} />
                 </button>
               )}
             </div>
