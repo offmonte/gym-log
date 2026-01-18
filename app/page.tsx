@@ -173,11 +173,11 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   {currentWorkout.exercises.map((exercise, index) => (
                     <div key={index} className="card">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-5 sm:mb-6 md:mb-7">
+                      <h3 className="text-base sm:text-lg font-semibold text-white mb-4">
                         {exercise.name}
                       </h3>
 
-                      <div className="space-y-3 sm:space-y-4 md:space-y-4">
+                      <div className="space-y-2 sm:space-y-3">
                         {exercise.sets.map((set) => {
                           const getComparisonIcon = (comp?: string) => {
                             switch (comp) {
