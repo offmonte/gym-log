@@ -132,10 +132,10 @@ export default function Home() {
             </div>
 
             {/* Workout info card */}
-            <div className="card">
+            <div className="card !gap-3 sm:!gap-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2">
+                  <label className="block text-xs font-medium text-text-secondary mb-1.5">
                     Data
                   </label>
                   <input
