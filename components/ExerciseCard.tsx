@@ -90,27 +90,27 @@ export default function ExerciseCard({
 
       {/* Edit Mode Actions */}
       {isEditing && (
-        <div className="space-y-3 sm:space-y-4 md:space-y-4 border-t border-tertiary pt-4 sm:pt-5 md:pt-6">
+        <div className="space-y-2 sm:space-y-3 border-t border-tertiary pt-4 sm:pt-4">
           <button
             onClick={handleAddSet}
-            className="w-full py-3 sm:py-3 md:py-4 font-bold text-xs sm:text-sm md:text-base hover:opacity-80 transition-all rounded-lg flex items-center justify-center gap-2"
-            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)', fontWeight: '700' }}
+            className="w-full py-2.5 sm:py-3 font-semibold text-xs sm:text-sm hover:opacity-80 transition-all rounded flex items-center justify-center gap-2"
+            style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'var(--color-up)' }}
           >
-            <Plus size={18} />
+            <Plus size={16} />
             Série
           </button>
 
-          <div className="flex gap-2 sm:gap-3 md:gap-3">
+          <div className="flex gap-2">
             <button
               onClick={() => setIsEditing(false)}
-              className="flex-1 btn-secondary text-xs sm:text-sm md:text-base py-3 flex items-center justify-center gap-1"
+              className="flex-1 btn-secondary text-xs sm:text-sm py-2.5 sm:py-3 flex items-center justify-center gap-1"
             >
               <Check size={16} />
               Pronto
             </button>
             <button
               onClick={onDelete}
-              className="flex-1 btn-danger text-xs sm:text-sm md:text-base py-3 flex items-center justify-center gap-1"
+              className="flex-1 btn-danger text-xs sm:text-sm py-2.5 sm:py-3 flex items-center justify-center gap-1"
             >
               <Trash2 size={16} />
               Deletar
