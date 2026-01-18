@@ -166,11 +166,11 @@ export default function Home() {
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-6 md:mb-8">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-5">
                   Exercícios de Hoje
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   {currentWorkout.exercises.map((exercise, index) => (
                     <div key={index} className="card">
                       <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-5 sm:mb-6 md:mb-7">
