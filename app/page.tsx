@@ -261,19 +261,19 @@ export default function Home() {
       {activeTab === 'history' && (
         <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
           <div className="w-full max-w-5xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
-              <Calendar size={40} className="text-white" />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Histórico</h1>
+            <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6">
+              <Calendar size={32} className="text-white flex-shrink-0" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Histórico</h1>
             </div>
 
             {sortedWorkouts.length === 0 ? (
-              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
-                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+              <div className="card text-center py-10 sm:py-12">
+                <p className="text-text-secondary text-sm sm:text-base">
                   Nenhum treino registrado
                 </p>
               </div>
             ) : (
-              <div className="space-y-4 sm:space-y-5 md:space-y-6">
+              <div className="space-y-3 sm:space-y-4">
                 {sortedWorkouts.map((workout) => (
                   <WorkoutCard
                     key={workout.id}
