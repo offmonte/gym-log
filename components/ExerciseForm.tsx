@@ -71,7 +71,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="card">
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
         Adicionar Exercício
       </h3>
 
@@ -82,7 +82,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
           value={exerciseName}
           onChange={(e) => setExerciseName(e.target.value)}
           placeholder="Nome do exercício"
-          className="w-full text-base"
+          className="w-full"
         />
       </div>
 
