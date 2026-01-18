@@ -88,7 +88,7 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
       {/* Series section */}
       <div>
-        <label className="block text-xs sm:text-sm md:text-sm font-medium text-text-secondary mb-4">
+        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-3">
           Séries
         </label>
 
