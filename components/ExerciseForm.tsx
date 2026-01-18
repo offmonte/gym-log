@@ -88,12 +88,12 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
       {/* Series section */}
       <div>
-        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-4 sm:mb-5">
+        <label className="block text-xs sm:text-sm md:text-sm font-medium text-text-secondary mb-4">
           Séries
         </label>
 
         {/* Column headers for desktop/tablet */}
-        <div className="hidden md:grid grid-cols-12 gap-3 mb-4 sm:mb-5 md:mb-5">
+        <div className="hidden md:grid grid-cols-12 gap-3 mb-4 px-1">
           <div className="col-span-2 text-xs font-medium text-text-tertiary">
             Série
           </div>
@@ -106,25 +106,25 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         </div>
 
         {/* Series list */}
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-2 sm:space-y-3">
           {sets.map((set, index) => (
             <div
               key={index}
-              className="grid grid-cols-12 gap-2 sm:gap-3 md:gap-3 p-3 sm:p-4 md:p-4 bg-tertiary/30 rounded-lg items-end"
+              className="grid grid-cols-12 gap-2 sm:gap-3 p-3 sm:p-3 md:p-2 bg-tertiary/30 rounded-lg items-end"
             >
               {/* Serie number - fixed */}
-              <div className="col-span-2 md:col-span-2">
+              <div className="col-span-2">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Série</p>
                 <input
                   type="text"
                   value={set.setNumber}
                   disabled
-                  className="w-full text-center bg-secondary text-white font-semibold text-base"
+                  className="w-full text-center bg-tertiary/50 text-white font-semibold text-sm rounded"
                 />
               </div>
 
               {/* Weight input */}
-              <div className="col-span-5 md:col-span-5">
+              <div className="col-span-5">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Carga</p>
                 <div className="relative flex items-center">
                   <input
@@ -133,22 +133,22 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                     value={set.weight || ''}
                     onChange={(e) => handleUpdateSet(index, 'weight', e.target.value)}
                     placeholder="0"
-                    className="w-full text-center text-base font-semibold pr-8"
+                    className="w-full text-center text-sm font-semibold pr-6"
                     inputMode="decimal"
                   />
-                  <span className="absolute right-3 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
+                  <span className="absolute right-2 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
                 </div>
               </div>
 
               {/* Reps input */}
-              <div className="col-span-5 md:col-span-5">
+              <div className="col-span-5">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Reps</p>
                 <input
                   type="number"
                   value={set.reps || ''}
                   onChange={(e) => handleUpdateSet(index, 'reps', e.target.value)}
                   placeholder="0"
-                  className="w-full text-center text-base font-semibold"
+                  className="w-full text-center text-sm font-semibold"
                   inputMode="numeric"
                 />
               </div>
@@ -158,14 +158,14 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index)}
-                  className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 sm:h-11 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
+                  className="col-span-2 flex items-center justify-center w-full h-10 sm:h-11 rounded font-bold hover:opacity-80 transition-opacity"
                   style={{
                     backgroundColor: 'rgba(239, 68, 68, 0.2)',
                     color: 'var(--color-down)',
                   }}
                   aria-label="Remover série"
                 >
-                  <Trash2 size={18} />
+                  <Trash2 size={16} />
                 </button>
               )}
             </div>
