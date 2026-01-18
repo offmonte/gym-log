@@ -92,9 +92,9 @@ export default function WorkoutCard({
           {/* Delete workout button */}
           <button
             onClick={onDelete}
-            className="w-full mt-6 sm:mt-7 md:mt-8 py-3 btn-danger text-xs sm:text-sm md:text-base flex items-center justify-center gap-2"
+            className="w-full mt-4 sm:mt-5 py-2.5 sm:py-3 btn-danger text-xs sm:text-sm flex items-center justify-center gap-2"
           >
-            <Trash2 size={18} />
+            <Trash2 size={16} />
             Deletar Treino
           </button>
         </div>
