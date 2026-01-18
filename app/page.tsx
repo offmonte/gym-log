@@ -202,30 +202,30 @@ export default function Home() {
                           return (
                             <div
                               key={set.setNumber}
-                              className="flex items-center justify-between py-3 sm:py-4 md:py-4 px-3 sm:px-4 md:px-5 bg-tertiary/20 rounded-lg"
+                              className="flex items-center justify-between py-2 sm:py-3 px-3 sm:px-4 bg-tertiary/20 rounded"
                             >
-                              <div className="flex items-baseline gap-2 sm:gap-2 md:gap-3 flex-1 min-w-0">
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">
+                              <div className="flex items-baseline gap-1 sm:gap-2 flex-1 min-w-0">
+                                <span className="text-xs sm:text-sm text-text-secondary shrink-0">
                                   Série {set.setNumber}:
                                 </span>
-                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                <span className="text-sm sm:text-base font-semibold text-white">
                                   {set.weight}
                                 </span>
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">kg</span>
-                                <span className="text-text-secondary mx-1 md:mx-2 shrink-0">×</span>
-                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                <span className="text-xs text-text-secondary shrink-0">kg</span>
+                                <span className="text-text-secondary mx-1 shrink-0">×</span>
+                                <span className="text-sm sm:text-base font-semibold text-white">
                                   {set.reps}
                                 </span>
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">reps</span>
+                                <span className="text-xs text-text-secondary shrink-0">reps</span>
                               </div>
 
                               <div
-                                className={`flex-shrink-0 ml-3 sm:ml-4 md:ml-5 text-xl sm:text-2xl md:text-3xl font-bold ${getComparisonColor(
+                                className={`flex-shrink-0 ml-2 sm:ml-3 text-lg sm:text-xl font-bold ${getComparisonColor(
                                   set.comparison
                                 )}`}
                               >
                                 {set.comparison === 'new' ? (
-                                  <span className="text-xs sm:text-xs md:text-sm font-bold">
+                                  <span className="text-xs font-bold">
                                     {getComparisonIcon(set.comparison)}
                                   </span>
                                 ) : (
