@@ -118,8 +118,8 @@ export default function Home() {
     <div className="bg-primary min-h-screen">
       {/* WORKOUT TAB */}
       {activeTab === 'workout' && (
-        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl space-y-4 sm:space-y-5 md:space-y-6">
+        <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
+          <div className="w-full max-w-5xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
             <div className="mb-6 sm:mb-8 md:mb-10">
               <div className="flex items-center gap-3 mb-2">
