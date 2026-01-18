@@ -54,20 +54,20 @@ export default function ExerciseCard({
   };
 
   return (
-    <div className="card mb-4 sm:mb-5 md:mb-6 animate-slide-in">
+    <div className="card mb-4 sm:mb-5 animate-slide-in">
       {/* Header */}
-      <div className="flex items-start justify-between mb-5 sm:mb-6 md:mb-7">
+      <div className="flex items-start justify-between mb-4 sm:mb-5">
         <div className="flex-1 min-w-0">
-          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white">{exercise.name}</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-white">{exercise.name}</h3>
           {lastDate && (
-            <p className="text-xs sm:text-xs md:text-sm text-text-secondary mt-2">Último: {lastDate}</p>
+            <p className="text-xs text-text-secondary mt-1">Último: {lastDate}</p>
           )}
         </div>
 
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="btn-secondary ml-3 sm:ml-3 md:ml-4 text-xs sm:text-xs md:text-sm px-3 py-2 flex items-center gap-1"
+            className="btn-secondary ml-3 text-xs sm:text-xs px-3 py-2 flex items-center gap-1 flex-shrink-0"
             aria-label="Editar exercício"
           >
             <Edit2 size={16} />
@@ -76,7 +76,7 @@ export default function ExerciseCard({
       </div>
 
       {/* Sets */}
-      <div className="mb-4 sm:mb-5 md:mb-6 space-y-3 sm:space-y-4 md:space-y-4">
+      <div className="space-y-2 sm:space-y-3">
         {exercise.sets.map((set, index) => (
           <SetRow
             key={index}
