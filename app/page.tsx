@@ -121,19 +121,19 @@ export default function Home() {
         <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
           <div className="w-full max-w-5xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
-            <div className="mb-6 sm:mb-8 md:mb-10">
-              <div className="flex items-center gap-3 mb-2">
-                <Dumbbell size={40} className="text-white" />
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Gym Log</h1>
+            <div className="mb-5 sm:mb-6 md:mb-8">
+              <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                <Dumbbell size={32} className="text-white flex-shrink-0" />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Gym Log</h1>
               </div>
-              <p className="text-text-secondary mt-2 text-sm sm:text-base md:text-base">
+              <p className="text-text-secondary mt-1 text-xs sm:text-sm">
                 {currentDayOfWeek} • {currentFormattedDate}
               </p>
             </div>
 
             {/* Workout info card */}
             <div className="card">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
                     Data
