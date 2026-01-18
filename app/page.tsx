@@ -146,7 +146,7 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2">
+                  <label className="block text-xs font-medium text-text-secondary mb-1.5">
                     Treino (opcional)
                   </label>
                   <input
