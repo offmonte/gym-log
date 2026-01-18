@@ -31,14 +31,14 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className="flex flex-col items-center justify-center flex-1 h-full transition-all text-xs font-medium"
+              className="flex flex-col items-center justify-center flex-1 h-full transition-all text-xs font-medium gap-1"
               style={{
                 color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
                 backgroundColor:
                   activeTab === tab.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
               }}
             >
-              <div className="mb-1" style={{
+              <div style={{
                 color: activeTab === tab.id ? 'var(--color-new)' : 'var(--text-secondary)',
               }}>
                 {tab.icon}
