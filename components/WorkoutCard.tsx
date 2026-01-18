@@ -41,34 +41,34 @@ export default function WorkoutCard({
   };
 
   return (
-    <div className="card mb-4 sm:mb-5 md:mb-6 cursor-pointer transition-all animate-slide-in">
+    <div className="card mb-4 sm:mb-5 cursor-pointer transition-all animate-slide-in">
       <button
         onClick={onToggleExpanded}
         className="w-full text-left"
       >
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white">
+            <h2 className="text-base sm:text-lg font-semibold text-white">
               {dayOfWeek} • {formattedDate}
             </h2>
             {workout.name && (
-              <p className="text-xs sm:text-sm text-text-secondary mt-2">
+              <p className="text-xs sm:text-sm text-text-secondary mt-1">
                 {workout.name}
               </p>
             )}
-            <p className="text-xs sm:text-xs text-text-tertiary mt-2">
+            <p className="text-xs text-text-tertiary mt-1">
               {workout.exercises.length} exercício(s)
             </p>
           </div>
           <div className="text-text-secondary transition-transform flex-shrink-0 ml-3">
-            {isExpanded ? <ChevronDown size={24} /> : <ChevronRight size={24} />}
+            {isExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
           </div>
         </div>
       </button>
 
       {/* Expanded content */}
       {isExpanded && (
-        <div className="mt-5 sm:mt-6 md:mt-7 border-t border-bg-tertiary pt-5 sm:pt-6 md:pt-7 space-y-4 sm:space-y-5 md:space-y-6">
+        <div className="mt-4 sm:mt-5 border-t border-bg-tertiary pt-4 sm:pt-5 space-y-4 sm:space-y-5">
           {workout.exercises.length === 0 ? (
             <p className="text-center text-text-secondary text-xs sm:text-sm py-4 sm:py-5">
               Nenhum exercício
