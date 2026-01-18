@@ -207,7 +207,8 @@ body {
 /* Responsive adjustments */
 @media (min-width: 768px) {
   body {
-    padding-bottom: 80px;
+    padding-bottom: 0;
+    padding-left: 256px;
     font-size: 15px;
   }
 
