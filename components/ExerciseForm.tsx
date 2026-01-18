@@ -174,12 +174,11 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
         {/* Error message */}
         {error && (
-          <div className="flex items-center gap-2 text-xs text-red-400 mt-3 sm:mt-4">
+          <div className="flex items-center gap-2 text-xs text-red-400 mt-2">
             <AlertCircle size={16} className="flex-shrink-0" />
             <p>{error}</p>
           </div>
         )}
-
       </div>
 
       {/* Buttons container - side by side */}
