@@ -259,8 +259,8 @@ export default function Home() {
 
       {/* HISTORY TAB */}
       {activeTab === 'history' && (
-        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl">
+        <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
+          <div className="w-full max-w-5xl">
             <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
               <Calendar size={40} className="text-white" />
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Histórico</h1>
