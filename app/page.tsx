@@ -135,18 +135,18 @@ export default function Home() {
             <div className="card">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2">
                     Data
                   </label>
                   <input
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full text-base"
+                    className="w-full"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
+                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2">
                     Treino (opcional)
                   </label>
                   <input
@@ -154,7 +154,7 @@ export default function Home() {
                     value={workoutName}
                     onChange={(e) => setWorkoutName(e.target.value)}
                     placeholder="Ex: Peito e Tríceps"
-                    className="w-full text-base"
+                    className="w-full"
                   />
                 </div>
               </div>
