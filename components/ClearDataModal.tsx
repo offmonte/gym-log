@@ -35,29 +35,29 @@ export default function ClearDataModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-secondary rounded-lg max-w-md w-full p-6 sm:p-8 animate-slide-in">
-        <div className="flex items-center gap-3 mb-4">
-          <AlertCircle size={28} className="text-red-500 flex-shrink-0" />
-          <h2 className="text-xl sm:text-2xl font-bold text-white">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="bg-secondary rounded-lg max-w-sm w-full p-5 sm:p-6 animate-slide-in">
+        <div className="flex items-center gap-3 mb-3 sm:mb-4">
+          <AlertCircle size={24} className="text-red-500 flex-shrink-0" />
+          <h2 className="text-lg sm:text-xl font-bold text-white">
             Tem certeza?
           </h2>
         </div>
 
-        <p className="text-text-secondary text-sm sm:text-base mb-6 leading-relaxed">
+        <p className="text-text-secondary text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
           Tem certeza que deseja apagar <span className="font-semibold">TODAS</span> suas anotações de treino? Esse processo não poderá ser revertido depois.
         </p>
 
         {!isButtonEnabled && (
-          <p className="text-xs sm:text-sm text-text-tertiary mb-6 text-center">
+          <p className="text-xs text-text-tertiary mb-4 sm:mb-6 text-center">
             Botão de apagar disponível em {secondsRemaining} segundo{secondsRemaining !== 1 ? 's' : ''}...
           </p>
         )}
 
-        <div className="flex gap-3 sm:gap-4">
+        <div className="flex gap-2 sm:gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-3 btn-secondary text-sm font-medium flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 sm:py-3 btn-secondary text-xs sm:text-sm font-medium flex items-center justify-center gap-1"
           >
             <X size={16} />
             Cancelar
@@ -66,7 +66,7 @@ export default function ClearDataModal({
           <button
             onClick={onConfirm}
             disabled={!isButtonEnabled}
-            className="flex-1 py-3 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 sm:py-3 text-xs sm:text-sm font-medium rounded transition-all flex items-center justify-center gap-1"
             style={{
               backgroundColor: isButtonEnabled ? 'var(--color-down)' : 'var(--bg-tertiary)',
               color: isButtonEnabled ? 'white' : 'var(--text-secondary)',
