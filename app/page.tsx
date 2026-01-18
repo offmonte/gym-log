@@ -294,27 +294,27 @@ export default function Home() {
       {activeTab === 'settings' && (
         <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
           <div className="w-full max-w-5xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
-              <Settings size={40} className="text-white" />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Ajustes</h1>
+            <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6">
+              <Settings size={32} className="text-white flex-shrink-0" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Ajustes</h1>
             </div>
 
             <div className="card">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Sobre</h3>
-              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Sobre</h3>
+              <p className="text-text-secondary text-xs sm:text-sm mb-4 sm:mb-6">
                 Gym Log v1.0 - Seu companheiro de treino na academia
               </p>
 
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Armazenamento</h3>
-              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-5 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Armazenamento</h3>
+              <p className="text-text-secondary text-xs sm:text-sm mb-4">
                 Total de treinos: {workouts.length}
               </p>
 
               <button
                 onClick={() => setShowClearDataModal(true)}
-                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6 flex items-center justify-center gap-2"
+                className="w-full py-2.5 sm:py-3 btn-danger text-xs sm:text-sm px-4 flex items-center justify-center gap-2"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} />
                 Limpar Dados
               </button>
             </div>
