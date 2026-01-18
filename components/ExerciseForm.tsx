@@ -183,23 +183,26 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
       </div>
 
       {/* Buttons container - side by side */}
-      <div className="flex gap-3 sm:gap-4 md:gap-4">
+      <div className="flex gap-2 sm:gap-3 md:gap-3">
         {/* Add series button */}
         <button
           type="button"
           onClick={handleAddSet}
-          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base flex items-center justify-center gap-1"
-          style={{ fontWeight: '700' }}
+          className="flex-1 py-3 sm:py-3 font-bold rounded text-xs sm:text-sm hover:opacity-80 transition-all flex items-center justify-center gap-2"
+          style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: 'var(--color-new)' }}
         >
           <Plus size={18} />
-          Série
+          <span className="hidden sm:inline">Série</span>
+          <span className="sm:hidden">+</span>
         </button>
 
         {/* Submit button */}
-        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg flex items-center justify-center gap-2"
-          style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
+        <button
+          type="submit"
+          className="flex-1 py-3 btn-primary font-semibold text-xs sm:text-sm flex items-center justify-center gap-2"
+        >
           <Plus size={18} />
-          Adicionar Exercício
+          <span>Adicionar Exercício</span>
         </button>
       </div>
     </form>
