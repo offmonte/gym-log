@@ -131,30 +131,16 @@ export default function Home() {
 
             {/* Workout info card */}
             <div className="card !gap-3 sm:!gap-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-text-secondary mb-1.5">
-                    Data
-                  </label>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-text-secondary mb-1.5">
-                    Treino (opcional)
-                  </label>
-                  <input
-                    type="text"
-                    value={workoutName}
-                    onChange={(e) => setWorkoutName(e.target.value)}
-                    placeholder="Ex: Peito e Tríceps"
-                    className="w-full"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-medium text-text-secondary mb-1.5">
+                  Data
+                </label>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="w-full"
+                />
               </div>
             </div>
 
