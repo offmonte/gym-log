@@ -51,11 +51,6 @@ export default function WorkoutCard({
             <h2 className="text-base sm:text-lg font-semibold text-white">
               {dayOfWeek} • {formattedDate}
             </h2>
-            {workout.name && (
-              <p className="text-xs sm:text-sm text-text-secondary mt-1">
-                {workout.name}
-              </p>
-            )}
             <p className="text-xs text-text-tertiary mt-1">
               {workout.exercises.length} exercício(s)
             </p>
