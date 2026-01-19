@@ -39,7 +39,6 @@ export default function Home() {
     return {
       id: generateId(),
       date: selectedDate,
-      name: workoutName,
       exercises: [],
     };
   };
