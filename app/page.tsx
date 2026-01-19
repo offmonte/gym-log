@@ -130,20 +130,8 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Workout info card */}
-            <div className="card !gap-3 sm:!gap-4">
-              <div>
-                <label className="block text-xs font-medium text-text-secondary mb-1.5">
-                  Data
-                </label>
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-            </div>
+            {/* Week view */}
+            <WeekView selectedDate={selectedDate} onDateChange={setSelectedDate} />
 
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
