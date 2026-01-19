@@ -21,7 +21,6 @@ import ClearDataModal from '@/components/ClearDataModal';
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
-  const [workoutName, setWorkoutName] = useState('');
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<NavTab>('workout');
