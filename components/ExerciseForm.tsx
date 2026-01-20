@@ -110,15 +110,42 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         Adicionar Exercício
       </h3>
 
-      {/* Exercise name input */}
-      <div>
+      {/* Exercise name input with suggestions */}
+      <div className="relative">
         <input
           type="text"
           value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
+          onChange={(e) => handleExerciseNameChange(e.target.value)}
+          onBlur={() => {
+            // Delay closing suggestions to allow click handler to fire
+            setTimeout(() => setShowSuggestions(false), 150);
+          }}
+          onFocus={() => {
+            if (exerciseName.trim().length > 0 && filteredSuggestions.length > 0) {
+              setShowSuggestions(true);
+            }
+          }}
           placeholder="Nome do exercício"
           className="w-full"
+          autoComplete="off"
         />
+
+        {/* Suggestions dropdown */}
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-tertiary border border-tertiary/50 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto">
+            {filteredSuggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseDown={(e) => e.preventDefault()} // Prevent blur from closing dropdown
+                className="w-full px-4 py-2 text-left text-sm text-white hover:bg-tertiary/80 transition-colors border-b border-tertiary/50 last:border-b-0 font-medium"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Series section */}
