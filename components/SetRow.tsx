@@ -1,11 +1,11 @@
 'use client';
 
 import { Trash2 } from 'lucide-react';
-import { Set, ComparisonResult } from '@/lib/types';
+import { ExerciseSet, ComparisonResult } from '@/lib/types';
 
 interface SetRowProps {
-  set: Set;
-  onUpdate: (set: Set) => void;
+  set: ExerciseSet;
+  onUpdate: (set: ExerciseSet) => void;
   onDelete: () => void;
   isEditing: boolean;
 }
