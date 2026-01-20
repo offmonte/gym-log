@@ -275,12 +275,18 @@ export default function Home() {
 
             {/* About Section */}
             <div className="card">
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Sobre</h3>
-              <p className="text-text-secondary text-xs sm:text-sm mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Sobre</h3>
+              <p className="text-text-secondary text-xs sm:text-sm">
                 Gym Log v1.0 - Seu companheiro de treino na academia
               </p>
+            </div>
 
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Armazenamento</h3>
+            {/* Export Section */}
+            <ExportData workouts={workouts} />
+
+            {/* Storage Section */}
+            <div className="card">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Armazenamento</h3>
               <p className="text-text-secondary text-xs sm:text-sm mb-4">
                 Total de treinos: {workouts.length}
               </p>
@@ -293,9 +299,6 @@ export default function Home() {
                 Limpar Dados
               </button>
             </div>
-
-            {/* Export Section */}
-            <ExportData workouts={workouts} />
           </div>
         </div>
       )}
