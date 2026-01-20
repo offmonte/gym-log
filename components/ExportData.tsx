@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, FileText, File } from 'lucide-react';
+import { Download, Copy, Check } from 'lucide-react';
 import { Workout } from '@/lib/types';
 import {
   filterWorkoutsByPeriod,
@@ -20,31 +20,40 @@ type ExportFormat = 'text' | 'csv';
 export default function ExportData({ workouts }: ExportDataProps) {
   const [timePeriod, setTimePeriod] = useState<TimePeriod>('all');
   const [exportFormat, setExportFormat] = useState<ExportFormat>('text');
-
-  const handleExport = () => {
-    const filteredWorkouts = filterWorkoutsByPeriod(workouts, timePeriod);
-
-    let content = '';
-    let filename = '';
-    let mimeType = 'text/plain';
-
-    if (exportFormat === 'text') {
-      content = formatWorkoutsAsText(filteredWorkouts);
-      const dateStr = new Date().toISOString().split('T')[0];
-      filename = `treinos_${dateStr}.txt`;
-    } else {
-      content = formatWorkoutsAsCSV(filteredWorkouts);
-      const dateStr = new Date().toISOString().split('T')[0];
-      filename = `treinos_${dateStr}.csv`;
-      mimeType = 'text/csv';
-    }
-
-    downloadFile(content, filename, mimeType);
-  };
+  const [textContent, setTextContent] = useState<string>('');
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
 
   const getWorkoutCount = () => {
     return filterWorkoutsByPeriod(workouts, timePeriod).length;
   };
+
+  const handleGenerateText = () => {
+    const filteredWorkouts = filterWorkoutsByPeriod(workouts, timePeriod);
+    const content = formatWorkoutsAsText(filteredWorkouts);
+    setTextContent(content);
+  };
+
+  const handleExportCSV = () => {
+    const filteredWorkouts = filterWorkoutsByPeriod(workouts, timePeriod);
+    const content = formatWorkoutsAsCSV(filteredWorkouts);
+    const dateStr = new Date().toISOString().split('T')[0];
+    const filename = `treinos_${dateStr}.csv`;
+    downloadFile(content, filename, 'text/csv');
+  };
+
+  const handleCopyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(textContent);
+      setCopiedToClipboard(true);
+      setTimeout(() => setCopiedToClipboard(false), 2000);
+    } catch (err) {
+      console.error('Falha ao copiar para clipboard:', err);
+    }
+  };
+
+  const isTextFormat = exportFormat === 'text';
+  const hasWorkouts = getWorkoutCount() > 0;
+  const hasTextContent = textContent.length > 0;
 
   return (
     <div className="card">
@@ -52,93 +61,103 @@ export default function ExportData({ workouts }: ExportDataProps) {
         Exportar Dados
       </h3>
 
-      {/* Period Selection */}
-      <div className="mb-5">
-        <label className="block text-xs font-medium text-text-secondary mb-2">
+      {/* Period Dropdown */}
+      <div className="mb-4">
+        <label htmlFor="period-select" className="block text-xs font-medium text-text-secondary mb-2">
           Período
         </label>
-        <div className="space-y-2">
-          {[
-            { value: 'week' as TimePeriod, label: 'Última semana' },
-            { value: 'month' as TimePeriod, label: 'Último mês' },
-            { value: 'all' as TimePeriod, label: 'Todos os treinos' },
-          ].map((option) => (
-            <label
-              key={option.value}
-              className="flex items-center p-2.5 rounded cursor-pointer hover:bg-tertiary/30 transition-colors"
-            >
-              <input
-                type="radio"
-                name="timePeriod"
-                value={option.value}
-                checked={timePeriod === option.value}
-                onChange={(e) => setTimePeriod(e.target.value as TimePeriod)}
-                className="w-4 h-4 cursor-pointer"
-              />
-              <span className="ml-3 text-xs sm:text-sm text-text-primary">
-                {option.label}
-              </span>
-            </label>
-          ))}
-        </div>
+        <select
+          id="period-select"
+          value={timePeriod}
+          onChange={(e) => {
+            setTimePeriod(e.target.value as TimePeriod);
+            setTextContent('');
+          }}
+          className="w-full px-3 py-2 text-xs sm:text-sm rounded border border-bg-tertiary bg-tertiary/30 text-text-primary cursor-pointer hover:border-color-new transition-colors"
+        >
+          <option value="week">Última semana</option>
+          <option value="month">Último mês</option>
+          <option value="all">Todos os treinos</option>
+        </select>
       </div>
 
-      {/* Format Selection */}
-      <div className="mb-5">
-        <label className="block text-xs font-medium text-text-secondary mb-2">
+      {/* Format Dropdown */}
+      <div className="mb-4">
+        <label htmlFor="format-select" className="block text-xs font-medium text-text-secondary mb-2">
           Formato
         </label>
-        <div className="space-y-2">
-          {[
-            { value: 'text' as ExportFormat, label: 'Texto simples (.txt)', icon: FileText },
-            { value: 'csv' as ExportFormat, label: 'CSV (.csv)', icon: File },
-          ].map((option) => {
-            const Icon = option.icon;
-            return (
-              <label
-                key={option.value}
-                className="flex items-center p-2.5 rounded cursor-pointer hover:bg-tertiary/30 transition-colors"
-              >
-                <input
-                  type="radio"
-                  name="exportFormat"
-                  value={option.value}
-                  checked={exportFormat === option.value}
-                  onChange={(e) => setExportFormat(e.target.value as ExportFormat)}
-                  className="w-4 h-4 cursor-pointer"
-                />
-                <Icon size={16} className="ml-3 text-text-secondary" />
-                <span className="ml-2 text-xs sm:text-sm text-text-primary">
-                  {option.label}
-                </span>
-              </label>
-            );
-          })}
-        </div>
+        <select
+          id="format-select"
+          value={exportFormat}
+          onChange={(e) => {
+            setExportFormat(e.target.value as ExportFormat);
+            setTextContent('');
+          }}
+          className="w-full px-3 py-2 text-xs sm:text-sm rounded border border-bg-tertiary bg-tertiary/30 text-text-primary cursor-pointer hover:border-color-new transition-colors"
+        >
+          <option value="text">Texto simples</option>
+          <option value="csv">CSV</option>
+        </select>
       </div>
 
       {/* Summary */}
-      <div className="p-3 bg-tertiary/20 rounded mb-5">
+      <div className="p-3 bg-tertiary/20 rounded mb-4">
         <p className="text-xs text-text-secondary">
           Total de treinos: <span className="font-semibold text-text-primary">{getWorkoutCount()}</span>
         </p>
       </div>
 
-      {/* Export Button */}
-      <button
-        onClick={handleExport}
-        disabled={getWorkoutCount() === 0}
-        className="w-full py-2.5 sm:py-3 font-semibold text-xs sm:text-sm rounded transition-all flex items-center justify-center gap-2"
-        style={{
-          backgroundColor: getWorkoutCount() > 0 ? 'var(--color-new)' : 'var(--bg-tertiary)',
-          color: getWorkoutCount() > 0 ? 'white' : 'var(--text-secondary)',
-          cursor: getWorkoutCount() > 0 ? 'pointer' : 'not-allowed',
-          opacity: getWorkoutCount() > 0 ? 1 : 0.6,
-        }}
-      >
-        <Download size={16} />
-        {getWorkoutCount() > 0 ? 'Exportar Dados' : 'Nenhum treino para exportar'}
-      </button>
+      {/* Action Buttons */}
+      <div className="flex gap-2">
+        <button
+          onClick={isTextFormat ? handleGenerateText : handleExportCSV}
+          disabled={!hasWorkouts}
+          className="flex-1 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm rounded transition-all flex items-center justify-center gap-2"
+          style={{
+            backgroundColor: hasWorkouts ? 'var(--color-new)' : 'var(--bg-tertiary)',
+            color: hasWorkouts ? 'white' : 'var(--text-secondary)',
+            cursor: hasWorkouts ? 'pointer' : 'not-allowed',
+            opacity: hasWorkouts ? 1 : 0.6,
+          }}
+        >
+          <Download size={16} />
+          {isTextFormat ? 'Gerar relatório' : 'Exportar treino'}
+        </button>
+
+        {/* Copy Button - Only show for text format with content */}
+        {isTextFormat && hasTextContent && (
+          <button
+            onClick={handleCopyToClipboard}
+            className="px-3 sm:px-4 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm rounded transition-all flex items-center justify-center gap-2"
+            style={{
+              backgroundColor: 'var(--bg-tertiary)',
+              color: copiedToClipboard ? 'var(--color-up)' : 'var(--text-secondary)',
+              border: copiedToClipboard ? `1px solid var(--color-up)` : '1px solid var(--bg-tertiary)',
+            }}
+          >
+            {copiedToClipboard ? (
+              <>
+                <Check size={16} />
+                Copiado
+              </>
+            ) : (
+              <>
+                <Copy size={16} />
+                Copiar
+              </>
+            )}
+          </button>
+        )}
+      </div>
+
+      {/* Text Preview - Only show for text format with content */}
+      {isTextFormat && hasTextContent && (
+        <div className="mt-4 p-3 sm:p-4 bg-tertiary/20 rounded border border-bg-tertiary max-h-96 overflow-y-auto">
+          <pre className="text-xs sm:text-sm text-text-secondary whitespace-pre-wrap break-words font-mono">
+            {textContent}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
