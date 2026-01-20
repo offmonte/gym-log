@@ -102,6 +102,10 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
     setExerciseName('');
     setSets([{ setNumber: 1, weight: 0, reps: 0 }]);
+
+    // Refresh suggestions list after adding exercise
+    const uniqueNames = getUniqueExerciseNames();
+    setAllExerciseNames(uniqueNames);
   };
 
   return (
