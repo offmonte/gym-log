@@ -18,6 +18,7 @@ import ExerciseForm from '@/components/ExerciseForm';
 import BottomNav, { NavTab } from '@/components/BottomNav';
 import ClearDataModal from '@/components/ClearDataModal';
 import WeekView from '@/components/WeekView';
+import ExportData from '@/components/ExportData';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
