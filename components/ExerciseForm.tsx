@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Trash2, Plus, AlertCircle } from 'lucide-react';
 import { Exercise } from '@/lib/types';
+import { getUniqueExerciseNames } from '@/lib/workoutUtils';
 
 interface ExerciseFormProps {
   onAddExercise: (exercise: Exercise) => void;
