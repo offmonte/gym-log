@@ -1,6 +1,6 @@
 export type ComparisonResult = 'up' | 'down' | 'equal' | 'new';
 
-export interface Set {
+export interface ExerciseSet {
   setNumber: number;
   weight: number;
   reps: number;
@@ -9,7 +9,7 @@ export interface Set {
 
 export interface Exercise {
   name: string;
-  sets: Set[];
+  sets: ExerciseSet[];
 }
 
 export interface Workout {

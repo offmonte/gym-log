@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Trash2, Plus, AlertCircle } from 'lucide-react';
 import { Exercise } from '@/lib/types';
+import { getUniqueExerciseNames } from '@/lib/workoutUtils';
 
 interface ExerciseFormProps {
   onAddExercise: (exercise: Exercise) => void;
@@ -12,6 +13,40 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
   const [exerciseName, setExerciseName] = useState('');
   const [sets, setSets] = useState([{ setNumber: 1, weight: 0, reps: 0 }]);
   const [error, setError] = useState('');
+  const [allExerciseNames, setAllExerciseNames] = useState<string[]>([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    // Load unique exercise names on component mount
+    const uniqueNames = getUniqueExerciseNames();
+    setAllExerciseNames(uniqueNames);
+  }, []);
+
+  const handleExerciseNameChange = (value: string) => {
+    setExerciseName(value);
+    setError('');
+
+    if (value.trim().length === 0) {
+      setShowSuggestions(false);
+      setFilteredSuggestions([]);
+      return;
+    }
+
+    // Filter suggestions: case-insensitive, partial match
+    const filtered = allExerciseNames.filter(name =>
+      name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setFilteredSuggestions(filtered);
+    setShowSuggestions(filtered.length > 0);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setExerciseName(suggestion);
+    setShowSuggestions(false);
+    setFilteredSuggestions([]);
+  };
 
   const handleAddSet = () => {
     setSets([
@@ -67,33 +102,64 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
     setExerciseName('');
     setSets([{ setNumber: 1, weight: 0, reps: 0 }]);
+
+    // Refresh suggestions list after adding exercise
+    const uniqueNames = getUniqueExerciseNames();
+    setAllExerciseNames(uniqueNames);
   };
 
   return (
     <form onSubmit={handleSubmit} className="card">
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
         Adicionar Exercício
       </h3>
 
-      {/* Exercise name input */}
-      <div>
+      {/* Exercise name input with suggestions */}
+      <div className="relative">
         <input
           type="text"
           value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
+          onChange={(e) => handleExerciseNameChange(e.target.value)}
+          onBlur={() => {
+            // Delay closing suggestions to allow click handler to fire
+            setTimeout(() => setShowSuggestions(false), 150);
+          }}
+          onFocus={() => {
+            if (exerciseName.trim().length > 0 && filteredSuggestions.length > 0) {
+              setShowSuggestions(true);
+            }
+          }}
           placeholder="Nome do exercício"
-          className="w-full text-base"
+          className="w-full"
+          autoComplete="off"
         />
+
+        {/* Suggestions dropdown */}
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-tertiary border border-tertiary/50 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto">
+            {filteredSuggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseDown={(e) => e.preventDefault()} // Prevent blur from closing dropdown
+                className="w-full px-4 py-2 text-left text-sm text-white hover:bg-tertiary/80 transition-colors border-b border-tertiary/50 last:border-b-0 font-medium"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Series section */}
       <div>
-        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-4 sm:mb-5">
+        <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-3">
           Séries
         </label>
 
         {/* Column headers for desktop/tablet */}
-        <div className="hidden md:grid grid-cols-12 gap-3 mb-4 sm:mb-5 md:mb-5">
+        <div className="hidden md:grid grid-cols-12 gap-3 mb-4 px-1">
           <div className="col-span-2 text-xs font-medium text-text-tertiary">
             Série
           </div>
@@ -106,25 +172,25 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
         </div>
 
         {/* Series list */}
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-2 sm:space-y-3">
           {sets.map((set, index) => (
             <div
               key={index}
-              className="grid grid-cols-12 gap-2 sm:gap-3 md:gap-3 p-3 sm:p-4 md:p-4 bg-tertiary/30 rounded-lg items-end"
+              className="grid grid-cols-12 gap-2 sm:gap-3 p-3 sm:p-3 md:p-2 bg-tertiary/30 rounded-lg items-end"
             >
               {/* Serie number - fixed */}
-              <div className="col-span-2 md:col-span-2">
+              <div className="col-span-2">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Série</p>
                 <input
                   type="text"
                   value={set.setNumber}
                   disabled
-                  className="w-full text-center bg-secondary text-white font-semibold text-base"
+                  className="w-full text-center bg-tertiary/50 text-white font-semibold text-sm rounded"
                 />
               </div>
 
               {/* Weight input */}
-              <div className="col-span-5 md:col-span-5">
+              <div className="col-span-5">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Carga</p>
                 <div className="relative flex items-center">
                   <input
@@ -133,22 +199,22 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                     value={set.weight || ''}
                     onChange={(e) => handleUpdateSet(index, 'weight', e.target.value)}
                     placeholder="0"
-                    className="w-full text-center text-base font-semibold pr-8"
+                    className="w-full text-center text-sm font-semibold pr-6"
                     inputMode="decimal"
                   />
-                  <span className="absolute right-3 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
+                  <span className="absolute right-2 text-text-secondary font-medium text-xs pointer-events-none">kg</span>
                 </div>
               </div>
 
               {/* Reps input */}
-              <div className="col-span-5 md:col-span-5">
+              <div className="col-span-5">
                 <p className="md:hidden text-xs text-text-secondary mb-2">Reps</p>
                 <input
                   type="number"
                   value={set.reps || ''}
                   onChange={(e) => handleUpdateSet(index, 'reps', e.target.value)}
                   placeholder="0"
-                  className="w-full text-center text-base font-semibold"
+                  className="w-full text-center text-sm font-semibold"
                   inputMode="numeric"
                 />
               </div>
@@ -158,14 +224,14 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index)}
-                  className="col-span-2 md:col-span-2 flex items-center justify-center w-full h-12 sm:h-11 md:h-10 rounded-lg font-bold hover:opacity-80 transition-opacity"
+                  className="col-span-2 flex items-center justify-center w-full h-10 sm:h-11 rounded font-bold hover:opacity-80 transition-opacity"
                   style={{
                     backgroundColor: 'rgba(239, 68, 68, 0.2)',
                     color: 'var(--color-down)',
                   }}
                   aria-label="Remover série"
                 >
-                  <Trash2 size={18} />
+                  <Trash2 size={16} />
                 </button>
               )}
             </div>
@@ -174,32 +240,34 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
 
         {/* Error message */}
         {error && (
-          <div className="flex items-center gap-2 text-xs text-red-400 mt-3 sm:mt-4">
+          <div className="flex items-center gap-2 text-xs text-red-400 mt-2">
             <AlertCircle size={16} className="flex-shrink-0" />
             <p>{error}</p>
           </div>
         )}
-
       </div>
 
       {/* Buttons container - side by side */}
-      <div className="flex gap-3 sm:gap-4 md:gap-4">
+      <div className="flex gap-2 sm:gap-3 md:gap-3">
         {/* Add series button */}
         <button
           type="button"
           onClick={handleAddSet}
-          className="flex-1 py-2 sm:py-3 md:py-4 text-primary font-bold rounded-lg bg-tertiary hover:opacity-80 transition-all text-xs sm:text-sm md:text-base flex items-center justify-center gap-1"
-          style={{ fontWeight: '700' }}
+          className="flex-1 py-3 sm:py-3 font-bold rounded text-xs sm:text-sm hover:opacity-80 transition-all flex items-center justify-center gap-2"
+          style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: 'var(--color-new)' }}
         >
           <Plus size={18} />
-          Série
+          <span className="hidden sm:inline">Série</span>
+          <span className="sm:hidden">+</span>
         </button>
 
         {/* Submit button */}
-        <button type="submit" className="flex-1 py-2 sm:py-3 md:py-4 btn-primary rounded-lg font-bold transition-all text-sm sm:text-base md:text-lg flex items-center justify-center gap-2"
-          style={{ backgroundColor: 'var(--color-new)', color: 'var(--text-primary)', fontWeight: '600' }}>
+        <button
+          type="submit"
+          className="flex-1 py-3 btn-primary font-semibold text-xs sm:text-sm flex items-center justify-center gap-2"
+        >
           <Plus size={18} />
-          Adicionar Exercício
+          <span>Adicionar Exercício</span>
         </button>
       </div>
     </form>

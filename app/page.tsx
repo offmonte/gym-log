@@ -17,11 +17,12 @@ import WorkoutCard from '@/components/WorkoutCard';
 import ExerciseForm from '@/components/ExerciseForm';
 import BottomNav, { NavTab } from '@/components/BottomNav';
 import ClearDataModal from '@/components/ClearDataModal';
+import WeekView from '@/components/WeekView';
+import ExportData from '@/components/ExportData';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
-  const [workoutName, setWorkoutName] = useState('');
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<NavTab>('workout');
@@ -40,7 +41,6 @@ export default function Home() {
     return {
       id: generateId(),
       date: selectedDate,
-      name: workoutName,
       exercises: [],
     };
   };
@@ -118,47 +118,21 @@ export default function Home() {
     <div className="bg-primary min-h-screen">
       {/* WORKOUT TAB */}
       {activeTab === 'workout' && (
-        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl space-y-4 sm:space-y-5 md:space-y-6">
+        <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
+          <div className="w-full max-w-5xl space-y-4 sm:space-y-5 md:space-y-6">
             {/* Header */}
-            <div className="mb-6 sm:mb-8 md:mb-10">
-              <div className="flex items-center gap-3 mb-2">
-                <Dumbbell size={40} className="text-white" />
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Gym Log</h1>
+            <div className="mb-5 sm:mb-6 md:mb-8">
+              <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                <Dumbbell size={32} className="text-white flex-shrink-0" />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Gym Log</h1>
               </div>
-              <p className="text-text-secondary mt-2 text-sm sm:text-base md:text-base">
+              <p className="text-text-secondary mt-1 text-xs sm:text-sm">
                 {currentDayOfWeek} • {currentFormattedDate}
               </p>
             </div>
 
-            {/* Workout info card */}
-            <div className="card">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
-                    Data
-                  </label>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full text-base"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-text-secondary mb-2 sm:mb-3">
-                    Treino (opcional)
-                  </label>
-                  <input
-                    type="text"
-                    value={workoutName}
-                    onChange={(e) => setWorkoutName(e.target.value)}
-                    placeholder="Ex: Peito e Tríceps"
-                    className="w-full text-base"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* Week view */}
+            <WeekView selectedDate={selectedDate} onDateChange={setSelectedDate} />
 
             {/* Exercise form */}
             <ExerciseForm onAddExercise={handleAddExercise} />
@@ -166,18 +140,18 @@ export default function Home() {
             {/* Current exercises section */}
             {currentWorkout.exercises.length > 0 && (
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-6 md:mb-8">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-5">
                   Exercícios de Hoje
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   {currentWorkout.exercises.map((exercise, index) => (
                     <div key={index} className="card">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-5 sm:mb-6 md:mb-7">
+                      <h3 className="text-base sm:text-lg font-semibold text-white mb-4">
                         {exercise.name}
                       </h3>
 
-                      <div className="space-y-3 sm:space-y-4 md:space-y-4">
+                      <div className="space-y-2 sm:space-y-3">
                         {exercise.sets.map((set) => {
                           const getComparisonIcon = (comp?: string) => {
                             switch (comp) {
@@ -202,30 +176,30 @@ export default function Home() {
                           return (
                             <div
                               key={set.setNumber}
-                              className="flex items-center justify-between py-3 sm:py-4 md:py-4 px-3 sm:px-4 md:px-5 bg-tertiary/20 rounded-lg"
+                              className="flex items-center justify-between py-2 sm:py-3 px-3 sm:px-4 bg-tertiary/20 rounded"
                             >
-                              <div className="flex items-baseline gap-2 sm:gap-2 md:gap-3 flex-1 min-w-0">
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">
+                              <div className="flex items-baseline gap-1 sm:gap-2 flex-1 min-w-0">
+                                <span className="text-xs sm:text-sm text-text-secondary shrink-0">
                                   Série {set.setNumber}:
                                 </span>
-                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                <span className="text-sm sm:text-base font-semibold text-white">
                                   {set.weight}
                                 </span>
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">kg</span>
-                                <span className="text-text-secondary mx-1 md:mx-2 shrink-0">×</span>
-                                <span className="text-base sm:text-lg md:text-xl font-semibold text-white">
+                                <span className="text-xs text-text-secondary shrink-0">kg</span>
+                                <span className="text-text-secondary mx-1 shrink-0">×</span>
+                                <span className="text-sm sm:text-base font-semibold text-white">
                                   {set.reps}
                                 </span>
-                                <span className="text-xs sm:text-sm md:text-base text-text-secondary shrink-0">reps</span>
+                                <span className="text-xs text-text-secondary shrink-0">reps</span>
                               </div>
 
                               <div
-                                className={`flex-shrink-0 ml-3 sm:ml-4 md:ml-5 text-xl sm:text-2xl md:text-3xl font-bold ${getComparisonColor(
+                                className={`flex-shrink-0 ml-2 sm:ml-3 text-lg sm:text-xl font-bold ${getComparisonColor(
                                   set.comparison
                                 )}`}
                               >
                                 {set.comparison === 'new' ? (
-                                  <span className="text-xs sm:text-xs md:text-sm font-bold">
+                                  <span className="text-xs font-bold">
                                     {getComparisonIcon(set.comparison)}
                                   </span>
                                 ) : (
@@ -244,11 +218,11 @@ export default function Home() {
 
             {/* Empty state */}
             {currentWorkout.exercises.length === 0 && (
-              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20 !gap-0">
-                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+              <div className="card text-center py-10 sm:py-12 !gap-0">
+                <p className="text-text-secondary text-sm sm:text-base">
                   Nenhum exercício adicionado
                 </p>
-                <p className="text-text-tertiary text-xs sm:text-sm md:text-base mt-2 sm:mt-3">
+                <p className="text-text-tertiary text-xs mt-1">
                   Adicione um exercício acima para começar
                 </p>
               </div>
@@ -259,21 +233,21 @@ export default function Home() {
 
       {/* HISTORY TAB */}
       {activeTab === 'history' && (
-        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
-              <Calendar size={40} className="text-white" />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Histórico</h1>
+        <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
+          <div className="w-full max-w-5xl">
+            <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6">
+              <Calendar size={32} className="text-white flex-shrink-0" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Histórico</h1>
             </div>
 
             {sortedWorkouts.length === 0 ? (
-              <div className="card text-center py-12 sm:py-14 md:py-16 lg:py-20">
-                <p className="text-text-secondary text-base sm:text-lg md:text-lg">
+              <div className="card text-center py-10 sm:py-12">
+                <p className="text-text-secondary text-sm sm:text-base">
                   Nenhum treino registrado
                 </p>
               </div>
             ) : (
-              <div className="space-y-4 sm:space-y-5 md:space-y-6">
+              <div className="space-y-3 sm:space-y-4">
                 {sortedWorkouts.map((workout) => (
                   <WorkoutCard
                     key={workout.id}
@@ -292,29 +266,36 @@ export default function Home() {
 
       {/* SETTINGS TAB */}
       {activeTab === 'settings' && (
-        <div className="flex justify-center px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-10">
-          <div className="w-full max-w-4xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
-              <Settings size={40} className="text-white" />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Ajustes</h1>
+        <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
+          <div className="w-full max-w-5xl space-y-4 sm:space-y-5">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Settings size={32} className="text-white flex-shrink-0" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Ajustes</h1>
             </div>
 
+            {/* About Section */}
             <div className="card">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Sobre</h3>
-              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Sobre</h3>
+              <p className="text-text-secondary text-xs sm:text-sm">
                 Gym Log v1.0 - Seu companheiro de treino na academia
               </p>
+            </div>
 
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4 sm:mb-5">Armazenamento</h3>
-              <p className="text-text-secondary text-xs sm:text-sm md:text-base mb-5 sm:mb-6">
+            {/* Export Section */}
+            <ExportData workouts={workouts} />
+
+            {/* Storage Section */}
+            <div className="card">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Armazenamento</h3>
+              <p className="text-text-secondary text-xs sm:text-sm mb-4">
                 Total de treinos: {workouts.length}
               </p>
 
               <button
                 onClick={() => setShowClearDataModal(true)}
-                className="w-full md:w-auto py-3 btn-danger text-xs sm:text-sm md:text-base px-6 flex items-center justify-center gap-2"
+                className="w-full py-2.5 sm:py-3 btn-danger text-xs sm:text-sm px-4 flex items-center justify-center gap-2"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} />
                 Limpar Dados
               </button>
             </div>

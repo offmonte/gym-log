@@ -1,4 +1,4 @@
-import { Workout, Exercise, Set, ComparisonResult } from './types';
+import { Workout, Exercise, ExerciseSet, ComparisonResult } from './types';
 
 const STORAGE_KEY = 'gymlog_workouts';
 
@@ -49,7 +49,7 @@ export const findLastExercise = (exerciseName: string, currentDate: string): Exe
 };
 
 // Compare sets
-export const compareSet = (current: Set, previous: Set | undefined): ComparisonResult => {
+export const compareSet = (current: ExerciseSet, previous: ExerciseSet | undefined): ComparisonResult => {
   if (!previous) return 'new';
   
   if (current.weight > previous.weight) {
@@ -119,4 +119,115 @@ export const getTodayDate = (): string => {
 // Generate unique ID
 export const generateId = (): string => {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
+};
+
+// Filter workouts by period
+type TimePeriod = 'week' | 'month' | 'all';
+
+export const filterWorkoutsByPeriod = (workouts: Workout[], period: TimePeriod): Workout[] => {
+  const today = new Date();
+  let startDate = new Date();
+
+  if (period === 'week') {
+    startDate.setDate(today.getDate() - 7);
+  } else if (period === 'month') {
+    startDate.setMonth(today.getMonth() - 1);
+  } else if (period === 'all') {
+    return [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
+
+  return workouts
+    .filter(w => new Date(w.date) >= startDate && new Date(w.date) <= today)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+};
+
+// Format workouts as plain text
+export const formatWorkoutsAsText = (workouts: Workout[]): string => {
+  if (workouts.length === 0) {
+    return 'Nenhum treino registrado no período selecionado.';
+  }
+
+  let text = 'TREINOS EXPORTADOS\n';
+  text += '='.repeat(50) + '\n\n';
+
+  workouts.forEach(workout => {
+    const dayOfWeek = getDayOfWeek(workout.date);
+    const formattedDate = formatDateForDisplay(workout.date);
+    text += `${dayOfWeek} (${formattedDate})\n`;
+    text += '-'.repeat(40) + '\n\n';
+
+    if (workout.exercises.length === 0) {
+      text += 'Nenhum exercício registrado.\n\n';
+      return;
+    }
+
+    workout.exercises.forEach(exercise => {
+      text += `${exercise.name}\n`;
+      exercise.sets.forEach(set => {
+        text += `  Série ${set.setNumber}: ${set.weight}kg — ${set.reps} reps\n`;
+      });
+      text += '\n';
+    });
+
+    text += '\n';
+  });
+
+  return text;
+};
+
+// Format workouts as CSV
+export const formatWorkoutsAsCSV = (workouts: Workout[]): string => {
+  if (workouts.length === 0) {
+    return 'dia,exercicio,serie_1,serie_2,serie_3,serie_4,serie_5';
+  }
+
+  let csv = 'dia,exercicio,serie_1,serie_2,serie_3,serie_4,serie_5\n';
+
+  workouts.forEach(workout => {
+    const formattedDate = formatDateForDisplay(workout.date);
+
+    workout.exercises.forEach(exercise => {
+      const setData: string[] = [];
+
+      // Add up to 5 series
+      for (let i = 0; i < 5; i++) {
+        const set = exercise.sets[i];
+        if (set) {
+          setData.push(`${set.weight}kg ${set.reps}reps`);
+        } else {
+          setData.push('');
+        }
+      }
+
+      const row = [formattedDate, exercise.name, ...setData].join(',');
+      csv += row + '\n';
+    });
+  });
+
+  return csv;
+};
+
+// Download file
+export const downloadFile = (content: string, filename: string, mimeType: string = 'text/plain') => {
+  const element = document.createElement('a');
+  element.setAttribute('href', `data:${mimeType};charset=utf-8,${encodeURIComponent(content)}`);
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
+
+// Get unique exercise names from all workouts
+export const getUniqueExerciseNames = (): string[] => {
+  const workouts = getWorkouts();
+  const exerciseNames = new Set<string>();
+
+  workouts.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      exerciseNames.add(exercise.name);
+    });
+  });
+
+  return Array.from(exerciseNames).sort();
 };
