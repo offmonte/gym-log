@@ -217,3 +217,17 @@ export const downloadFile = (content: string, filename: string, mimeType: string
   element.click();
   document.body.removeChild(element);
 };
+
+// Get unique exercise names from all workouts
+export const getUniqueExerciseNames = (): string[] => {
+  const workouts = getWorkouts();
+  const exerciseNames = new Set<string>();
+
+  workouts.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      exerciseNames.add(exercise.name);
+    });
+  });
+
+  return Array.from(exerciseNames).sort();
+};
