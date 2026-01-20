@@ -1,4 +1,4 @@
-import { Workout, Exercise, Set, ComparisonResult } from './types';
+import { Workout, Exercise, ExerciseSet, ComparisonResult } from './types';
 
 const STORAGE_KEY = 'gymlog_workouts';
 
