@@ -23,6 +23,31 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
     setAllExerciseNames(uniqueNames);
   }, []);
 
+  const handleExerciseNameChange = (value: string) => {
+    setExerciseName(value);
+    setError('');
+
+    if (value.trim().length === 0) {
+      setShowSuggestions(false);
+      setFilteredSuggestions([]);
+      return;
+    }
+
+    // Filter suggestions: case-insensitive, partial match
+    const filtered = allExerciseNames.filter(name =>
+      name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setFilteredSuggestions(filtered);
+    setShowSuggestions(filtered.length > 0);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setExerciseName(suggestion);
+    setShowSuggestions(false);
+    setFilteredSuggestions([]);
+  };
+
   const handleAddSet = () => {
     setSets([
       ...sets,
