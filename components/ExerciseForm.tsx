@@ -13,6 +13,15 @@ export default function ExerciseForm({ onAddExercise }: ExerciseFormProps) {
   const [exerciseName, setExerciseName] = useState('');
   const [sets, setSets] = useState([{ setNumber: 1, weight: 0, reps: 0 }]);
   const [error, setError] = useState('');
+  const [allExerciseNames, setAllExerciseNames] = useState<string[]>([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    // Load unique exercise names on component mount
+    const uniqueNames = getUniqueExerciseNames();
+    setAllExerciseNames(uniqueNames);
+  }, []);
 
   const handleAddSet = () => {
     setSets([
