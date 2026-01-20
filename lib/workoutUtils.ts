@@ -49,7 +49,7 @@ export const findLastExercise = (exerciseName: string, currentDate: string): Exe
 };
 
 // Compare sets
-export const compareSet = (current: Set, previous: Set | undefined): ComparisonResult => {
+export const compareSet = (current: ExerciseSet, previous: ExerciseSet | undefined): ComparisonResult => {
   if (!previous) return 'new';
   
   if (current.weight > previous.weight) {
