@@ -267,12 +267,13 @@ export default function Home() {
       {/* SETTINGS TAB */}
       {activeTab === 'settings' && (
         <div className="w-full flex justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-4 sm:py-5 md:py-6 lg:py-8">
-          <div className="w-full max-w-5xl">
-            <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6">
+          <div className="w-full max-w-5xl space-y-4 sm:space-y-5">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Settings size={32} className="text-white flex-shrink-0" />
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Ajustes</h1>
             </div>
 
+            {/* About Section */}
             <div className="card">
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Sobre</h3>
               <p className="text-text-secondary text-xs sm:text-sm mb-4 sm:mb-6">
@@ -292,6 +293,9 @@ export default function Home() {
                 Limpar Dados
               </button>
             </div>
+
+            {/* Export Section */}
+            <ExportData workouts={workouts} />
           </div>
         </div>
       )}
